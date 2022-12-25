@@ -1,4 +1,4 @@
-# Setup Vite React with Eslint & Prettier -Demo / Example
+# Setup Vite React with Eslint & Prettier - Demo / Example
 
 ![Setup Vite React with Eslint & Prettier ( Demo )](/public/react-vite-eslint-prettier.png)
 
