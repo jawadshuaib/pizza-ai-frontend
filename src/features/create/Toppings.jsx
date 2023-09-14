@@ -9,11 +9,12 @@ import H1 from '../../ui/H1';
 export default function Toppings() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [toppings, setToppings] = useState([]);
-  const [showAllOptionsBtn, setShowAllOptionsBtn] = useState(true);
 
   const availableToppings = useSelector((store) => store.toppings.available);
   const suggestedToppings = useSelector((store) => store.toppings.suggested);
+
+  const [showAllOptionsBtn, setShowAllOptionsBtn] = useState(true);
+  const [toppings, setToppings] = useState([]);
 
   useEffect(() => {
     // Filter available toppings to only show suggested toppings
@@ -31,12 +32,12 @@ export default function Toppings() {
   // Pass this function to Checkbox component
   function handleSelection(topping) {
     const isChecked = selectedToppings.includes(topping);
-    console.log(topping, isChecked);
-    // selectedToppings can differ from suggestedToppings
-    // if the user has manually selected or deselected a topping
+
+    // Add or remove topping from selected toppings
+    // based on whether they are checked or not
     selectedToppings = isChecked
-      ? suggestedToppings.filter((item) => item !== topping)
-      : [...suggestedToppings, topping];
+      ? selectedToppings.filter((item) => item !== topping)
+      : [...selectedToppings, topping];
   }
 
   function handleShowAllToppings() {
@@ -49,6 +50,7 @@ export default function Toppings() {
   function handlePreviewPizza() {
     // Save selected toppings to Redux store
     dispatch(updateSelectedToppings(selectedToppings));
+
     navigate('/create-pizza/preview');
   }
 
