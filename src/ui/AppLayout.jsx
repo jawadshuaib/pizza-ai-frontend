@@ -1,19 +1,26 @@
 import React from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Card from './Card';
 import Loader from './Loader';
+import HeaderImage from '../assets/header.png';
 
 export default function AppLayout() {
   const navigation = useNavigate();
   const isLoading = navigation.state === 'loading';
 
+  function handleBannerClick() {
+    navigation('/');
+  }
+
   return (
-    <div className="bg-white h-screen text-center dark:bg-gray-800">
-      <header>
-        <Link to="/" className="text-black dark:text-white">
-          Homepage
-        </Link>
-      </header>
-      <main>{isLoading ? <Loader /> : <Outlet />}</main>
+    <div className="grid place-items-center h-screen text-center dark:bg-gray-800">
+      <Card
+        headerImage={HeaderImage}
+        onClick={handleBannerClick}
+        alt="Header image created using Stable Diffusion"
+      >
+        <main>{isLoading ? <Loader /> : <Outlet />}</main>
+      </Card>
     </div>
   );
 }

@@ -4,14 +4,7 @@
     "es2021": true
   },
 
-  "extends": [
-    "airbnb",
-    "airbnb/hooks",
-    "airbnb/rules/react",
-    "plugin:react/recommended",
-    "plugin:import/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
 
   "overrides": [],
 

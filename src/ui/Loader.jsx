@@ -1,9 +1,11 @@
 import React from 'react';
+import PizzaLoader from '../assets/pizza-loader.gif';
 
 export default function Loader() {
   return (
-    <div className="text-center">
-      <div role="status">
+    <div className="py-10 place-items-center">
+      <img src={PizzaLoader} alt="loading" className="w-20 mx-auto" />
+      {/* <div role="status">
         <svg
           aria-hidden="true"
           className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-orange-400"
@@ -21,7 +23,7 @@ export default function Loader() {
           />
         </svg>
         <span className="sr-only">Loading...</span>
-      </div>
+      </div> */}
     </div>
   );
 }

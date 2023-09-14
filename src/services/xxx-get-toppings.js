@@ -1,5 +1,5 @@
 import askAI from './ask-ai';
-import getAllToppings from './query-supabase';
+import getAvailableToppings from './query-supabase';
 
 // Create a prompt
 let context = `You are a pizza chef. A customer needs your help to make a delicious pizza. 
@@ -12,7 +12,7 @@ Pick less than five toppings unless the customer tells you otherwise. Return the
 
 function askAIToSuggestToppings(input) {
   // Get toppings from DB in Supabase
-  const toppings = getAllToppings();
+  const toppings = getAvailableToppings();
 
   toppings.then((rows) => {
     // Create a string of toppings delimitted by line breaks

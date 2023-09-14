@@ -1,12 +1,13 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import './App.css';
 import Describe from './features/create/Describe';
 import Toppings from './features/create/Toppings';
-import Size from './features/create/Size';
+import Preview from './features/create/Preview';
 import Order from './features/order/Order';
 import AppLayout from './ui/AppLayout';
-import Home from './ui/Home';
 import Error from './ui/Error';
+import store from './store';
 
 function App() {
   const router = createBrowserRouter([
@@ -14,7 +15,7 @@ function App() {
       element: <AppLayout />,
       errorElement: <Error />,
       children: [
-        { path: '/', element: <Home /> },
+        { path: '/', element: <Describe />, errorElement: <Error /> },
 
         {
           path: '/create-pizza/describe',
@@ -22,13 +23,19 @@ function App() {
           errorElement: <Error />,
         },
         { path: '/create-pizza/toppings', element: <Toppings /> },
-        { path: '/create-pizza/size', element: <Size /> },
+        { path: '/create-pizza/preview', element: <Preview /> },
         { path: '/order-pizza', element: <Order /> },
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </>
+  );
 }
 
 export default App;
