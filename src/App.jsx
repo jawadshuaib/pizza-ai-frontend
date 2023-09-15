@@ -1,7 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './App.css';
-import Describe from './features/create/Describe';
+import Describe, {
+  loader as describeLoaders,
+} from './features/create/Describe';
 import Toppings from './features/create/Toppings';
 import Preview from './features/create/Preview';
 import Order from './features/order/Order';
@@ -15,14 +17,16 @@ function App() {
       element: <AppLayout />,
       errorElement: <Error />,
       children: [
-        { path: '/', element: <Describe />, errorElement: <Error /> },
-
         {
-          path: '/create-pizza/describe',
+          path: '/',
           element: <Describe />,
+          loader: describeLoaders,
           errorElement: <Error />,
         },
-        { path: '/create-pizza/toppings', element: <Toppings /> },
+        {
+          path: '/create-pizza/toppings',
+          element: <Toppings />,
+        },
         { path: '/create-pizza/preview', element: <Preview /> },
         { path: '/order-pizza', element: <Order /> },
       ],

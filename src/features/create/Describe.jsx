@@ -1,13 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Button from '../../ui/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { saveDescription } from '../../slices/pizzaSlice';
+import H1 from '../../ui/H1';
+import getAvailableToppings from '../../services/query-supabase';
+import { toLowerCaseArray } from '../../utils/common';
 import {
   setAvailableToppings,
   setSuggestedToppings,
 } from '../../slices/toppingsSlice';
-import { saveDescription } from '../../slices/pizzaSlice';
-import H1 from '../../ui/H1';
+// import getAvailableToppings from '../../services/query-supabase';
 
 export default function Describe() {
   const [description, setDescription] = useState(
@@ -15,25 +18,28 @@ export default function Describe() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const availableToppings = useSelector((store) => store.toppings.available);
+  const [availableToppings] = useLoaderData();
+  // const availableToppings = useSelector((store) => store.toppings.available);
 
-  useEffect(() => {
-    // Get available toppings from API
-    // and save it to Redux store
-    dispatch(setAvailableToppings());
-  }, []);
+  // useEffect(() => {
+  //   // Get available toppings from API
+  //   // and save it to Redux store
+  //   // dispatch(setAvailableToppings());
+  // }, []);
 
   const handleCreatePizza = () => {
     if (description === '') return;
-    // Save description to Redux store
-    // We will use this description to create the prompt
-    // for openai API
-    dispatch(saveDescription(description));
+    // Store availableToppings in Redux store
+    dispatch(setAvailableToppings(availableToppings));
 
     // Get suggested toppings from openai API
     // and save it to Redux store
     dispatch(setSuggestedToppings(availableToppings, description));
 
+    // Save description to Redux store
+    // We will use this description to create the prompt
+    // for openai API
+    dispatch(saveDescription(description));
     navigate('/create-pizza/toppings');
   };
 
@@ -60,4 +66,15 @@ export default function Describe() {
       </Button>
     </div>
   );
+}
+
+export async function loader() {
+  const availableToppings = async () => {
+    const available = await getAvailableToppings();
+    return toLowerCaseArray(available.map((row) => row.topping));
+  };
+
+  const loader1 = await availableToppings();
+
+  return [loader1];
 }

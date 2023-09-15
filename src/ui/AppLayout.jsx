@@ -3,10 +3,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Card from './Card';
 import Loader from './Loader';
 import HeaderImage from '../assets/header.png';
+import { useSelector } from 'react-redux';
 
 export default function AppLayout() {
   const navigation = useNavigate();
-  const isLoading = navigation.state === 'loading';
+  const apiLoading = useSelector((store) => store.loading.isLoading);
+  const loadingReason = useSelector((store) => store.loading.reason);
+  const isLoading = navigation.state === 'loading' || apiLoading;
 
   function handleBannerClick() {
     navigation('/');
@@ -19,7 +22,9 @@ export default function AppLayout() {
         onClick={handleBannerClick}
         alt="Header image created using Stable Diffusion"
       >
-        <main>{isLoading ? <Loader /> : <Outlet />}</main>
+        <main>
+          {isLoading ? <Loader reason={loadingReason} /> : <Outlet />}
+        </main>
       </Card>
     </div>
   );
