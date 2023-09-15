@@ -6,13 +6,13 @@ import HeaderImage from '../assets/header.png';
 import { useSelector } from 'react-redux';
 
 export default function AppLayout() {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const apiLoading = useSelector((store) => store.loading.isLoading);
   const loadingReason = useSelector((store) => store.loading.reason);
-  const isLoading = navigation.state === 'loading' || apiLoading;
+  const isLoading = navigate.state === 'loading' || apiLoading;
 
   function handleBannerClick() {
-    navigation('/');
+    navigate('/');
   }
 
   return (

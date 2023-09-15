@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import H1 from '../../ui/H1';
 import Button from '../../ui/Button';
+import Paragraph from '../../ui/Paragraph';
 import { useNavigate } from 'react-router-dom';
 
 export default function Preview() {
@@ -18,12 +19,12 @@ export default function Preview() {
   return (
     <>
       <H1>{AIName !== '' ? `${AIName} Pizza...` : ``}Yummm!</H1>
-      <p className="block mb-2 text-xl text-gray-900 dark:text-white">
+      <Paragraph>
         {AIDescription !== '' ? AIDescription : description}
-      </p>
-      <p className="block mb-2 text-xl text-gray-900 dark:text-white">
+      </Paragraph>
+      <Paragraph>
         Toppings: {selectedToppings.map((topping) => `${topping}\n`)}
-      </p>
+      </Paragraph>
       <Button onClick={handleOrderPizza}>Order Pizza</Button>
     </>
   );

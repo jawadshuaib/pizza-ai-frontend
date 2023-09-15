@@ -26,8 +26,13 @@ function App() {
         {
           path: '/create-pizza/toppings',
           element: <Toppings />,
+          errorElement: <Error />,
         },
-        { path: '/create-pizza/preview', element: <Preview /> },
+        {
+          path: '/create-pizza/preview',
+          element: <Preview />,
+          errorElement: <Error />,
+        },
         { path: '/order-pizza', element: <Order /> },
       ],
     },

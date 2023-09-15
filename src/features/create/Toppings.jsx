@@ -6,6 +6,7 @@ import Checkbox from '../../ui/Checkbox';
 import Button from '../../ui/Button';
 import H1 from '../../ui/H1';
 import { setAISuggestions } from '../../slices/pizzaSlice';
+import Paragraph from '../../ui/Paragraph';
 
 export default function Toppings() {
   const navigate = useNavigate();
@@ -64,9 +65,9 @@ export default function Toppings() {
   return (
     <>
       <H1>Pick Your Toppings</H1>
-      <p className="block mb-2 text-xl text-gray-900 dark:text-white">
+      <Paragraph>
         We suggest the following toppings based on your craving:
-      </p>
+      </Paragraph>
       <ul className="text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
         {toppings.map((topping) => (
           <li
