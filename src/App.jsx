@@ -21,19 +21,19 @@ function App() {
           path: '/',
           element: <Describe />,
           loader: describeLoaders,
-          errorElement: <Error />,
         },
         {
           path: '/create-pizza/toppings',
           element: <Toppings />,
-          errorElement: <Error />,
         },
         {
           path: '/create-pizza/preview',
           element: <Preview />,
-          errorElement: <Error />,
         },
-        { path: '/order-pizza', element: <Order /> },
+        {
+          path: '/order-pizza',
+          element: <Order />,
+        },
       ],
     },
   ]);

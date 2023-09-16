@@ -27,9 +27,9 @@ export default function Error() {
         <H1>Oops! Something Went Wrong</H1>
         <Paragraph>{`Sorry about that. Here's what we know:`}</Paragraph>
         <Paragraph>
-          <div className="text-2xl bg-yellow-200 rounded-md">
+          <span className="text-2xl bg-yellow-200 rounded-md">
             {error.data || error.message}
-          </div>
+          </span>
         </Paragraph>
         <Button onClick={handleGoBack}>Go Back</Button>
       </Card>

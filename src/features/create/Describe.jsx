@@ -1,16 +1,15 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import Button from '../../ui/Button';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { saveDescription } from '../../slices/pizzaSlice';
-import H1 from '../../ui/H1';
 import getAvailableToppings from '../../services/query-supabase';
 import { toLowerCaseArray } from '../../utils/common';
+import Button from '../../ui/Button';
+import H1 from '../../ui/H1';
 import {
   setAvailableToppings,
   setSuggestedToppings,
 } from '../../slices/toppingsSlice';
-// import getAvailableToppings from '../../services/query-supabase';
 
 export default function Describe() {
   const [description, setDescription] = useState(
@@ -19,13 +18,6 @@ export default function Describe() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [availableToppings] = useLoaderData();
-  // const availableToppings = useSelector((store) => store.toppings.available);
-
-  // useEffect(() => {
-  //   // Get available toppings from API
-  //   // and save it to Redux store
-  //   // dispatch(setAvailableToppings());
-  // }, []);
 
   const handleCreatePizza = () => {
     if (description === '') return;

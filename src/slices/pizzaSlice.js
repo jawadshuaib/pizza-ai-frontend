@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setLoading } from './loadingSlice';
 import askAI from '../services/ask-ai';
+import generateImage, { createImagePrompt } from '../services/generate-image';
 
 const initialState = {
   description: '',
   AIName: '',
   AIDescription: '',
+  AIImage: '',
 };
 
 const pizzaReducer = createSlice({
@@ -21,12 +23,25 @@ const pizzaReducer = createSlice({
     setAIDescription(state, action) {
       state.AIDescription = action.payload;
     },
+    setAIImage(state, action) {
+      state.AIImage = action.payload;
+    },
   },
 });
 
 export default pizzaReducer.reducer;
 
 export const { saveDescription } = pizzaReducer.actions;
+
+export function setAIImage(toppings) {
+  return async function (dispatch) {
+    dispatch(setLoading([true, 'Creating preview...']));
+    const imagePrompt = createImagePrompt(toppings);
+    const imageUrl = await generateImage(imagePrompt);
+    dispatch(pizzaReducer.actions.setAIImage(imageUrl));
+    dispatch(setLoading([false, '']));
+  };
+}
 
 export function setAISuggestions(toppings) {
   // Get suggested toppings from openai
