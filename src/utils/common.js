@@ -13,4 +13,23 @@ function capitalizeFirstLetters(str) {
     .join(' ');
 }
 
-export { strToKey, toLowerCaseArray, capitalizeFirstLetters };
+async function fetchImageBlob(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Failed to fetch the image');
+  }
+
+  return await response.blob();
+}
+
+function blobToFile(blob, fileName = 'temp-name.png') {
+  return new File([blob], fileName, { type: 'image/png' });
+}
+
+export {
+  strToKey,
+  toLowerCaseArray,
+  capitalizeFirstLetters,
+  fetchImageBlob,
+  blobToFile,
+};

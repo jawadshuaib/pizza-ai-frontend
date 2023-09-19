@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-// VITE_SUPABASE_SECRET_KEY
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,

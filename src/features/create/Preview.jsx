@@ -5,6 +5,8 @@ import Button from '../../ui/Button';
 import Paragraph from '../../ui/Paragraph';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../ui/Loader';
+// import { uploadImageToSupabase } from '../../services/upload-image-to-supabase';
+// import { imageToBase64 } from '../../utils/common';
 
 export default function Preview() {
   const navigate = useNavigate();
@@ -21,6 +23,11 @@ export default function Preview() {
   }, []);
 
   function handleOrderPizza() {
+    // const convertedImage = imageToBase64({ file: `${AIImage}.png` });
+    // console.log(convertedImage);
+    // uploadImageToSupabase(convertedImage).then((data) => {
+    //   console.log(data);
+    // });
     navigate('/order-pizza');
   }
 
