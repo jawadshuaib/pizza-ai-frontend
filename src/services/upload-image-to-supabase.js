@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { blobToFile, fetchImageBlob } from '../utils/common';
+import settings from '../utils/settings';
 // import { v4 as uuidv4 } from 'uuid';
 
 const supabase = createClient(
@@ -7,9 +8,20 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_KEY,
 );
 
+console.log(import.meta.env.VITE_SUPABASE_URL);
+
 export async function fetchAndUploadImage(imageUrl) {
+  // Get development or production proxy
+  const corsProxy = settings.mode.isDevelopment
+    ? settings.corsProxy.local
+    : settings.corsProxy.remote;
+  // Add proxy to image url
+  imageUrl = `${corsProxy}${imageUrl}`;
+  // fetch image blob
   const blob = await fetchImageBlob(imageUrl);
+  // convert blob to file
   const file = blobToFile(blob);
+  // upload image to Supabase Storage
   return await uploadImageToSupabase(file);
 }
 // Upload image to Supabase Storage

@@ -37,5 +37,10 @@
     "tailwindcss": "^3.3.3",
     "vite": "^4.0.0",
     "vite-plugin-eslint": "^1.8.1"
-  }
+  },
+  "description": "This repository showcase a basic setup for Vite React with eslint & prettier using airbnb as a base style guide. Support for Tailwind has also been added.",
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
