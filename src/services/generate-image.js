@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import settings from '../utils/settings';
 
 async function sendRequest({ token, prompt, n, size }) {
   const openai = new OpenAI({
@@ -19,8 +20,11 @@ async function sendRequest({ token, prompt, n, size }) {
 }
 
 export default function generateImage(prompt) {
+  const token = settings.mode.isDevelopment
+    ? import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI
+    : null;
   return sendRequest({
-    token: import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI,
+    token,
     prompt,
     n: 1,
     size: '512x512', // 1024x1024

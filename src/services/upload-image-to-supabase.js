@@ -8,8 +8,6 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_KEY,
 );
 
-console.log(import.meta.env.VITE_SUPABASE_URL);
-
 export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy
   const corsProxy = settings.mode.isDevelopment
