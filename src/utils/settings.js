@@ -1,5 +1,5 @@
 const mode = {
-  isDevelopment: true,
+  isDevelopment: localStorage.getItem('isDevelopment') === 'true' ?? true,
 };
 
 const corsProxy = {

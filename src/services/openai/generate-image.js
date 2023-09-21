@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import settings from '../utils/settings';
+import settings from '../../utils/settings';
 
 async function sendRequest({ token, prompt, n, size }) {
   const openai = new OpenAI({

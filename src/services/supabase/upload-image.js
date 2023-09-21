@@ -1,12 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
-import { blobToFile, fetchImageBlob } from '../utils/common';
-import settings from '../utils/settings';
+import supabase from './supabase';
+import { blobToFile, fetchImageBlob } from '../../utils/common';
+import settings from '../../utils/settings';
 // import { v4 as uuidv4 } from 'uuid';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_KEY,
-);
 
 export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy

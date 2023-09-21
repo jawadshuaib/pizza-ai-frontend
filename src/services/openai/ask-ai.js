@@ -1,4 +1,4 @@
-import settings from '../utils/settings';
+import settings from '../../utils/settings';
 
 async function sendRequest({ token, model, context, input, temperature }) {
   const messages = [
@@ -23,16 +23,24 @@ async function sendRequest({ token, model, context, input, temperature }) {
       Authorization: `Bearer ${token}`,
     };
   }
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      headers,
+      method: 'POST',
+      body: JSON.stringify({ messages, model, temperature }),
+    });
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    headers,
-    method: 'POST',
-    body: JSON.stringify({ messages, model, temperature }),
-  });
+    if (!response.ok) {
+      throw new Error(
+        `Failed with status: ${response.status} (${response.statusText})`,
+      );
+    }
 
-  const data = await response.json();
-
-  return data.choices[0].message.content;
+    const data = await response.json();
+    return data.choices[0].message.content;
+  } catch (error) {
+    return { error: error.message };
+  }
 }
 
 export default function askAI({ context, input }) {

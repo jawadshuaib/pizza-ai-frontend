@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setLoading } from './loadingSlice';
-import askAI from '../services/ask-ai';
-import generateImage, { createImagePrompt } from '../services/generate-image';
+import { setError } from './errorSlice';
+import askAI from '../services/openai/ask-ai';
+import generateImage, {
+  createImagePrompt,
+} from '../services/openai/generate-image';
 
 const initialState = {
   description: '',
@@ -37,8 +40,19 @@ export function setAIImage(toppings) {
   return async function (dispatch) {
     dispatch(setLoading([true, 'Creating preview...']));
     const imagePrompt = createImagePrompt(toppings);
-    const imageUrl = await generateImage(imagePrompt);
-    dispatch(pizzaReducer.actions.setAIImage(imageUrl));
+    try {
+      const imageUrl = await generateImage(imagePrompt);
+      dispatch(pizzaReducer.actions.setAIImage(imageUrl));
+    } catch (error) {
+      dispatch(
+        setError([
+          true,
+          'There was a problem generating preview image for this pizza using AI.',
+        ]),
+      );
+    }
+
+    dispatch(setError([false]));
     dispatch(setLoading([false, '']));
   };
 }
@@ -65,15 +79,25 @@ export function setAISuggestions(toppings) {
       with the fields 'name' and 'description'. 
       Return the answer in JSON only.`;
 
-    const resp = await askAI({
-      context,
-      input,
-    });
+    try {
+      const resp = await askAI({
+        context,
+        input,
+      });
 
-    const pizzaAI = JSON.parse(resp);
+      const pizzaAI = JSON.parse(resp);
 
-    dispatch(pizzaReducer.actions.setAIName(pizzaAI.name));
-    dispatch(pizzaReducer.actions.setAIDescription(pizzaAI.description));
+      dispatch(pizzaReducer.actions.setAIName(pizzaAI.name));
+      dispatch(pizzaReducer.actions.setAIDescription(pizzaAI.description));
+      dispatch(setError([false]));
+    } catch (error) {
+      dispatch(
+        setError([
+          true,
+          'There was a problem generating description for this pizza using AI.',
+        ]),
+      );
+    }
     dispatch(setLoading([false, '']));
   };
 }

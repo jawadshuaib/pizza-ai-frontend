@@ -4,10 +4,12 @@ import Card from './Card';
 import Loader from './Loader';
 import HeaderImage from '../assets/header.png';
 import { useSelector } from 'react-redux';
+import FlagError from './FlagError';
 
 export default function AppLayout() {
   const navigate = useNavigate();
   const apiLoading = useSelector((store) => store.loading.isLoading);
+  const flagError = useSelector((store) => store.error.isError);
   const loadingReason = useSelector((store) => store.loading.reason);
   const isLoading = navigate.state === 'loading' || apiLoading;
 
@@ -23,6 +25,7 @@ export default function AppLayout() {
         alt="Header image created using Stable Diffusion"
       >
         <main>
+          {flagError && <FlagError />}
           {isLoading ? <Loader reason={loadingReason} /> : <Outlet />}
         </main>
       </Card>

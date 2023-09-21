@@ -1,7 +1,7 @@
 /* eslint-env node */
 const fetch = require('node-fetch');
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event) {
   const imageUrl = event.queryStringParameters.url;
 
   if (!imageUrl) {

@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setLoading } from './loadingSlice';
 import { toLowerCaseArray } from '../utils/common';
-import askAI from '../services/ask-ai';
+import askAI from '../services/openai/ask-ai';
+import { setError } from './errorSlice';
 
 const initialState = {
   available: [],
@@ -54,15 +55,25 @@ export function setSuggestedToppings(availableToppings, input) {
     const toppingsStr = availableToppings.join('\n');
     // Add toppings to the prompt
     context = context.replace('---CUSTOM---STRING---HERE---', toppingsStr);
-    // availableToppings;
-    // input;
-    const resp = await askAI({
-      context,
-      input,
-    });
-    // const suggestions = toLowerCaseArray(['Onions', 'Bacon']);
-    const suggestions = JSON.parse(resp).toppings;
-    dispatch(toppingsReducer.actions.setSuggestedToppings(suggestions));
-    dispatch(setLoading([false, '']));
+
+    try {
+      const resp = await askAI({
+        context,
+        input,
+      });
+      // const suggestions = toLowerCaseArray(['Onions', 'Bacon']);
+      const suggestions = JSON.parse(resp).toppings;
+      dispatch(toppingsReducer.actions.setSuggestedToppings(suggestions));
+      dispatch(setLoading([false, '']));
+      dispatch(setError([false]));
+    } catch (error) {
+      dispatch(setLoading([false, '']));
+      dispatch(
+        setError([
+          true,
+          'There was an error getting suggested toppings from AI.',
+        ]),
+      );
+    }
   };
 }

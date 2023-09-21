@@ -1,9 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_KEY,
-);
+import supabase from './supabase';
 
 export default async function getAvailableToppings() {
   const { data } = await supabase.from('toppings').select();

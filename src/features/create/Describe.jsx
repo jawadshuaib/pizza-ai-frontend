@@ -2,7 +2,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { saveDescription } from '../../slices/pizzaSlice';
-import getAvailableToppings from '../../services/query-supabase';
+import getAvailableToppings from '../../services/supabase/query';
 import { toLowerCaseArray } from '../../utils/common';
 import Button from '../../ui/Button';
 import H1 from '../../ui/H1';
@@ -26,6 +26,7 @@ export default function Describe() {
 
     // Get suggested toppings from openai API
     // and save it to Redux store
+
     dispatch(setSuggestedToppings(availableToppings, description));
 
     // Save description to Redux store
