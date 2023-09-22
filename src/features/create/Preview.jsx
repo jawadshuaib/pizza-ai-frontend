@@ -44,7 +44,9 @@ export default function Preview() {
         {AIDescription !== '' ? AIDescription : description}
       </Paragraph>
 
-      <Button onClick={handleOrderPizza}>Order Pizza</Button>
+      {AIImage !== '' && (
+        <Button onClick={handleOrderPizza}>Order Pizza</Button>
+      )}
     </>
   );
 }
