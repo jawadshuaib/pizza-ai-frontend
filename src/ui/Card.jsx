@@ -17,7 +17,7 @@ export default function Card({
     >
       <img
         onClick={handleClick}
-        className="rounded-t-lg cursor-pointer"
+        className="rounded-t-lg cursor-pointer max-h-[469px] object-contain"
         src={headerImage}
         alt={alt}
       />

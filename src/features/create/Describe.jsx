@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { saveDescription } from '../../slices/pizzaSlice';
 import getAvailableToppings from '../../services/supabase/query';
-import { toLowerCaseArray } from '../../utils/common';
+// import { toLowerCaseArray } from '../../utils/common';
 import Button from '../../ui/Button';
 import H1 from '../../ui/H1';
 import {
@@ -26,8 +26,8 @@ export default function Describe() {
 
     // Get suggested toppings from openai API
     // and save it to Redux store
-
-    dispatch(setSuggestedToppings(availableToppings, description));
+    const toppings = availableToppings.map((row) => row.topping);
+    dispatch(setSuggestedToppings(toppings, description));
 
     // Save description to Redux store
     // We will use this description to create the prompt
@@ -64,7 +64,10 @@ export default function Describe() {
 export async function loader() {
   const availableToppings = async () => {
     const available = await getAvailableToppings();
-    return toLowerCaseArray(available.map((row) => row.topping));
+    return available.map((row) => {
+      return { ...row, topping: row.topping.toLowerCase() };
+    });
+    // return toLowerCaseArray(available.map((row) => row.topping));
   };
 
   const loader1 = await availableToppings();

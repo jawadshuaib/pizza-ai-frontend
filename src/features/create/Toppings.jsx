@@ -25,10 +25,13 @@ export default function Toppings() {
 
     // Filter available toppings to only show suggested toppings
     // when the component mounts for the first time
+    // Note: the returned values are an array of STRINGS containing toppings
     setToppings(
-      availableToppings.filter((topping) =>
-        suggestedToppings.includes(topping),
-      ),
+      availableToppings
+        .filter((row) => {
+          return suggestedToppings.includes(row.topping);
+        })
+        .map((row) => row.topping),
     );
   }, []);
 

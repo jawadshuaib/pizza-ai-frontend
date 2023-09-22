@@ -1,7 +1,7 @@
 import supabase from './supabase';
 import { blobToFile, fetchImageBlob } from '../../utils/common';
 import settings from '../../utils/settings';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy
@@ -19,8 +19,7 @@ export async function fetchAndUploadImage(imageUrl) {
 }
 // Upload image to Supabase Storage
 export async function uploadImageToSupabase(file) {
-  // const path = `public/${uuidv4()}.png`;
-  const path = `public/test.png`;
+  const path = `public/${uuidv4()}.png`;
   const { data, error } = await supabase.storage
     .from('pizza-images')
     .upload(path, file, {

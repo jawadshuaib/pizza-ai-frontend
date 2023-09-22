@@ -27,7 +27,7 @@ export default function generateImage(prompt) {
     token,
     prompt,
     n: 1,
-    size: '512x512', // 1024x1024
+    size: '512x512',
   });
 }
 

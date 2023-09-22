@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Card from './Card';
 import Loader from './Loader';
 import HeaderImage from '../assets/header.png';
@@ -8,10 +8,19 @@ import FlagError from './FlagError';
 
 export default function AppLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
   const apiLoading = useSelector((store) => store.loading.isLoading);
-  const flagError = useSelector((store) => store.error.isError);
+  // Listen to errors relating to API loading
+  const apiError = useSelector((store) => store.error.isError);
   const loadingReason = useSelector((store) => store.loading.reason);
   const isLoading = navigate.state === 'loading' || apiLoading;
+  const AIImage = useSelector((store) => store.pizza.AIImage);
+
+  // Show the AI generated pizza image if available
+  const headerImage =
+    location.pathname.includes('/order-pizza') && AIImage !== ''
+      ? AIImage
+      : HeaderImage;
 
   function handleBannerClick() {
     navigate('/');
@@ -20,12 +29,12 @@ export default function AppLayout() {
   return (
     <div className="grid place-items-center h-screen text-center dark:bg-gray-800">
       <Card
-        headerImage={HeaderImage}
+        headerImage={headerImage}
         onClick={handleBannerClick}
         alt="Header image created using Stable Diffusion"
       >
         <main>
-          {flagError && <FlagError />}
+          {apiError && <FlagError />}
           {isLoading ? <Loader reason={loadingReason} /> : <Outlet />}
         </main>
       </Card>

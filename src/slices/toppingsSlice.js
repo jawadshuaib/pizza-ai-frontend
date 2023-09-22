@@ -38,7 +38,7 @@ export const {
   setAvailableToppings,
 } = toppingsReducer.actions;
 
-export function setSuggestedToppings(availableToppings, input) {
+export function setSuggestedToppings(allToppings = [], input) {
   // Get suggested toppings from openai
   return async function (dispatch) {
     dispatch(setLoading([true, 'Getting suggested toppings...']));
@@ -52,7 +52,9 @@ export function setSuggestedToppings(availableToppings, input) {
         Pick less than five toppings unless the customer tells you otherwise. Return the answer in JSON only.`;
 
     // Create a string of toppings delimitted by line breaks
-    const toppingsStr = availableToppings.join('\n');
+    // Note, this is different from availableToppings as it is an array of strings
+    // and not an array of objects
+    const toppingsStr = allToppings.join('\n');
     // Add toppings to the prompt
     context = context.replace('---CUSTOM---STRING---HERE---', toppingsStr);
 
