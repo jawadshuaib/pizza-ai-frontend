@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { saveDescription } from '../../slices/pizzaSlice';
 import getAvailableToppings from '../../services/supabase/query';
+import { mode } from '../../utils/settings';
 // import { toLowerCaseArray } from '../../utils/common';
 import Button from '../../ui/Button';
 import H1 from '../../ui/H1';
@@ -13,7 +14,7 @@ import {
 
 export default function Describe() {
   const [description, setDescription] = useState(
-    'Large vegetarian pizza with extra cheese.',
+    mode.isDevelopment ? 'Large vegetarian pizza with extra cheese.' : '',
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,14 +42,14 @@ export default function Describe() {
       <H1>{`Let's Make You a Pizza!`}</H1>
       <label
         htmlFor="description"
-        className="block mb-2 text-xl text-gray-900 dark:text-white"
+        className="block mb-2 text-xl text-gray-400 dark:text-white"
       >
         What are you craving?
         <textarea
           id="description"
           rows="4"
-          className="block my-3 p-2.5 w-full text-lg text-center text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Large vegetarian pizza with extra cheese."
+          className="block my-3 p-2.5 w-full text-2xl text-center text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Vegetarian pizza with three popular toppings."
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />

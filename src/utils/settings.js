@@ -1,8 +1,8 @@
-const mode = {
+export const mode = {
   isDevelopment: localStorage.getItem('isDevelopment') === 'true' ?? true,
 };
 
-const corsProxy = {
+export const corsProxy = {
   local: 'https://cors-anywhere.herokuapp.com/', //'http://localhost:3000?url=',
   remote: '/.netlify/functions/cors-proxy?url=',
 };

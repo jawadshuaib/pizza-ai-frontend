@@ -7,6 +7,7 @@ import Describe, {
 import Toppings from './features/create/Toppings';
 import Preview from './features/create/Preview';
 import Order from './features/order/Order';
+import Success from './features/order/Success';
 import AppLayout from './ui/AppLayout';
 import Error from './ui/Error';
 import store from './store';
@@ -33,6 +34,10 @@ function App() {
         {
           path: '/order-pizza',
           element: <Order />,
+        },
+        {
+          path: '/order-success',
+          element: <Success />,
         },
       ],
     },

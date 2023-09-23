@@ -10,10 +10,10 @@ import Loader from '../../ui/Loader';
 
 export default function Preview() {
   const navigate = useNavigate();
-  const description = useSelector((store) => store.pizza.description);
   const AIName = useSelector((store) => store.pizza.AIName);
-  const AIDescription = useSelector((store) => store.pizza.AIDescription);
   const AIImage = useSelector((store) => store.pizza.AIImage);
+  const description = useSelector((store) => store.pizza.description);
+  const AIDescription = useSelector((store) => store.pizza.AIDescription);
   const selectedToppings = useSelector((store) => store.toppings.selected);
 
   useEffect(() => {
@@ -23,11 +23,6 @@ export default function Preview() {
   }, []);
 
   function handleOrderPizza() {
-    // const convertedImage = imageToBase64({ file: `${AIImage}.png` });
-    // console.log(convertedImage);
-    // uploadImageToSupabase(convertedImage).then((data) => {
-    //   console.log(data);
-    // });
     navigate('/order-pizza');
   }
 
@@ -44,7 +39,7 @@ export default function Preview() {
         {AIDescription !== '' ? AIDescription : description}
       </Paragraph>
 
-      {AIImage !== '' && (
+      {AIImage !== '' && AIName !== '' && AIDescription !== '' && (
         <Button onClick={handleOrderPizza}>Order Pizza</Button>
       )}
     </>

@@ -1,4 +1,4 @@
-import settings from '../../utils/settings';
+import { mode } from '../../utils/settings';
 
 async function sendRequest({ token, model, context, input, temperature }) {
   const messages = [
@@ -44,7 +44,7 @@ async function sendRequest({ token, model, context, input, temperature }) {
 }
 
 export default function askAI({ context, input }) {
-  const token = settings.mode.isDevelopment
+  const token = mode.isDevelopment
     ? import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI
     : null;
   return sendRequest({

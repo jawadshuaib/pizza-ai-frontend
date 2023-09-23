@@ -1,15 +1,13 @@
 import supabase from './supabase';
 import { blobToFile, fetchImageBlob } from '../../utils/common';
-import settings from '../../utils/settings';
+import { mode, corsProxy } from '../../utils/settings';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy
-  const corsProxy = settings.mode.isDevelopment
-    ? settings.corsProxy.local
-    : settings.corsProxy.remote;
   // Add proxy to image url
-  imageUrl = `${corsProxy}${imageUrl}`;
+  const baseUrl = mode.isDevelopment ? corsProxy.local : corsProxy.remote;
+  imageUrl = `${baseUrl}${imageUrl}`;
   // fetch image blob
   const blob = await fetchImageBlob(imageUrl);
   // convert blob to file

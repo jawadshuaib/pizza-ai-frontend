@@ -57,11 +57,9 @@ export default function Toppings() {
   }
 
   function handlePreviewPizza() {
-    // Save selected toppings to Redux store
+    // Save selected options to Redux store
     dispatch(updateSelectedToppings(selectedToppings));
-
     dispatch(setAISuggestions(selectedToppings));
-
     dispatch(setAIImage(selectedToppings));
 
     navigate('/create-pizza/preview');
