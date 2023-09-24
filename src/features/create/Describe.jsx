@@ -12,7 +12,7 @@ import {
 
 export default function Describe() {
   const defaultDescription =
-    'Pizza with toppings that begin with the letter A.';
+    'Make me a pizza with toppings that begin with the letter A.';
   const [description, setDescription] = useState(defaultDescription);
   const dispatch = useDispatch();
   const navigate = useNavigate();

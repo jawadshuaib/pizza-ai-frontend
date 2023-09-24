@@ -5,6 +5,7 @@ import H1 from '../../ui/H1';
 import Button from '../../ui/Button';
 import Loader from '../../ui/Loader';
 import Paragraph from '../../ui/Paragraph';
+import Image from '../../ui/Image';
 
 export default function Preview() {
   const navigate = useNavigate();
@@ -26,11 +27,11 @@ export default function Preview() {
 
   return (
     <>
-      <H1>{AIName !== '' ? `${AIName} Pizza...Yummm!` : ``}</H1>
+      <H1>{AIName !== '' ? `${AIName}...Yummm!` : ``}</H1>
 
       {AIImage !== '' ? (
         <>
-          <img className="mx-auto rounded-md" src={AIImage} alt={AIName} />
+          <Image src={AIImage} alt={AIName} />
           <Paragraph>
             {AIDescription !== '' ? AIDescription : description}
           </Paragraph>

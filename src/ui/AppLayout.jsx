@@ -18,7 +18,7 @@ export default function AppLayout() {
 
   // Show the AI generated pizza image if available
   const headerImage =
-    location.pathname.includes('/order-pizza') && AIImage !== ''
+    location.pathname.includes('/order/') && AIImage !== ''
       ? AIImage
       : HeaderImage;
 

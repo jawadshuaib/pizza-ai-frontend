@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import { Card as FlowbiteCard } from 'flowbite-react';
 export default function Card({
   children,
   onClick,
@@ -17,25 +16,12 @@ export default function Card({
     >
       <img
         onClick={handleClick}
-        className="rounded-t-lg cursor-pointer max-h-[469px] object-contain"
+        className="rounded-t-lg cursor-pointer min-w-[768px] max-h-[469px] object-contain"
         src={headerImage}
         alt={alt}
       />
 
       <div className="p-6 px-20">{children}</div>
     </div>
-    // <FlowbiteCard
-    //   // imgAlt={imgAlt}
-    //   style={{ width: 500 + 'px' }}
-    //   className="mx-auto"
-    //   // imgSrc={headerImage}
-    //   onClick={handleClick}
-    //   renderImage={() => {
-    //     <img imgSrc={headerImage} imgAlt={imgAlt} />;
-    //   }}
-    // >
-    //   <img src={headerImage} alt={imgAlt} />
-    //   {children}
-    // </FlowbiteCard>
   );
 }

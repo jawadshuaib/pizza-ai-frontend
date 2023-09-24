@@ -34,9 +34,9 @@ const pizzaReducer = createSlice({
 
 export default pizzaReducer.reducer;
 
-export const { saveDescription } = pizzaReducer.actions;
+export const { saveDescription, setAIImage } = pizzaReducer.actions;
 
-export function setAIImage(toppings) {
+export function generateAndSetAIImage(toppings) {
   return async function (dispatch) {
     dispatch(setLoading([true, 'Creating preview...']));
     const imagePrompt = createImagePrompt(toppings);

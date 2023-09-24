@@ -8,13 +8,18 @@ import {
   getToppingsOrdered,
 } from '../../services/supabase/query';
 import Loader from '../../ui/Loader';
+import { getImageFromSupabase } from '../../services/supabase/upload';
+// import Image from '../../ui/Image';
+import { setAIImage } from '../../slices/pizzaSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Status() {
   const { orderId } = useParams();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState({});
-  // const [customerDetails, setCustomerDetails] = useState({});
   const [toppingIds, setToppingIds] = useState([]);
+  // const [image, setImage] = useState('');
 
   useEffect(() => {
     if (orderId === '') return;
@@ -27,14 +32,21 @@ export default function Status() {
       // Get customer information
       getCustomerDetails({ customerId: order[0]['customer_id'] }).then(
         (customer) => {
-          // Save customer details
-          console.log(`Customer: ${customer}`);
-          // setOrderDetails((prevState) => ({
-          //   ...prevState,
-          //   ...customer[0]['email'],
-          // }));
+          // Save customer email
+          setOrderDetails((prevState) => ({
+            ...prevState,
+            email: customer[0]['email'],
+          }));
         },
       );
+
+      // Download image from supabase storage
+      getImageFromSupabase(order[0]['image_url']).then((image) => {
+        // Save image
+        // setImage(image);
+
+        dispatch(setAIImage(image));
+      });
 
       // Get toppings selected
       getToppingsOrdered({ orderId }).then((toppings) => {
@@ -46,14 +58,15 @@ export default function Status() {
     });
   }, []);
 
-  console.log(orderDetails.order_id, toppingIds);
+  console.log(orderDetails, toppingIds);
 
   if (loading) return <Loader reason="Fetching your order details...📦" />;
 
   return (
     <>
       <H1>Order Completed!</H1>
-      <Paragraph>We have mailed your pizza to you!</Paragraph>
+      <Paragraph>Your pizza has been mailed.</Paragraph>
+      {/* {image !== '' && <Image src={image} alt={orderDetails['pizza_name']} />} */}
     </>
   );
 }
