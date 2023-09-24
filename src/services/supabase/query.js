@@ -14,6 +14,30 @@ export async function getSimilarToppings(embedding) {
   return data;
 }
 
+export async function getOrderDetails({ orderId }) {
+  const { data } = await supabase
+    .from('orders')
+    .select()
+    .eq('order_id', orderId);
+  return data;
+}
+
+export async function getCustomerDetails({ customerId }) {
+  const { data } = await supabase
+    .from('customers')
+    .select()
+    .eq('customer_id', customerId);
+  return data;
+}
+
+export async function getToppingsOrdered({ orderId }) {
+  const { data } = await supabase
+    .from('order_toppings')
+    .select('topping_id')
+    .eq('order_id', orderId);
+  return data;
+}
+
 /*
 --- How to query Supabase ---
   const handleGetAllToppings = () => {

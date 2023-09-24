@@ -32,8 +32,8 @@ export async function uploadImageToSupabase(file) {
 }
 
 // Get image from Supabase Storage
-export async function getImageFromSupabase() {
-  const path = `public/test-manual.png`;
+export async function getImageFromSupabase(path) {
+  // const path = `public/test-manual.png`;
   const { data, error } = await supabase.storage
     .from('pizza-images')
     .download(path);

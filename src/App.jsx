@@ -7,7 +7,7 @@ import Describe, {
 import Toppings from './features/create/Toppings';
 import Preview from './features/create/Preview';
 import Order from './features/order/Order';
-import Success from './features/order/Success';
+import Status from './features/order/Status';
 import AppLayout from './ui/AppLayout';
 import Error from './ui/Error';
 import store from './store';
@@ -32,12 +32,12 @@ function App() {
           element: <Preview />,
         },
         {
-          path: '/order-pizza',
+          path: '/order/pizza',
           element: <Order />,
         },
         {
-          path: '/order-success',
-          element: <Success />,
+          path: '/order/status/:orderId',
+          element: <Status />,
         },
       ],
     },

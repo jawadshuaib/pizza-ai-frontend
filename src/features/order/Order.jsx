@@ -13,9 +13,10 @@ export default function Order() {
   const isLoading = useSelector((store) => store.loading.isLoading);
   const loadingReason = useSelector((store) => store.loading.reason);
   const description = useSelector((store) => store.pizza.description);
+  const orderCompleted = useSelector((store) => store.order.completed);
+  const order = useSelector((store) => store.order.order);
   const AIDescription = useSelector((store) => store.pizza.AIDescription);
   const selectedToppings = useSelector((store) => store.toppings.selected);
-  const orderCompleted = useSelector((store) => store.order.completed);
   const availableToppings = useSelector((store) => store.toppings.available);
 
   useEffect(() => {
@@ -31,7 +32,8 @@ export default function Order() {
     }
 
     if (orderCompleted) {
-      navigate('/order-success');
+      const orderId = order[0]['order_id'];
+      navigate(`/order/status/${orderId}`);
     }
   }, []);
 

@@ -60,7 +60,7 @@ export function createOrder({
       dispatch(setLoading([true, 'Submitting order...📦']));
       // Create customer
       const customer = await insertCustomer({ email });
-      const customerId = customer['customer_id'];
+      const customerId = customer[0]['customer_id'];
 
       dispatch(setLoading([true, 'Uploading pizza image...🍕']));
       // Upload image

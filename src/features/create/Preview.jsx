@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import H1 from '../../ui/H1';
 import Button from '../../ui/Button';
-import Paragraph from '../../ui/Paragraph';
-import { useNavigate } from 'react-router-dom';
 import Loader from '../../ui/Loader';
-// import { uploadImageToSupabase } from '../../services/upload-image-to-supabase';
-// import { imageToBase64 } from '../../utils/common';
+import Paragraph from '../../ui/Paragraph';
 
 export default function Preview() {
   const navigate = useNavigate();
@@ -23,21 +21,23 @@ export default function Preview() {
   }, []);
 
   function handleOrderPizza() {
-    navigate('/order-pizza');
+    navigate('/order/pizza');
   }
 
   return (
     <>
-      <H1>{AIName !== '' ? `${AIName} Pizza...` : ``}Yummm!</H1>
+      <H1>{AIName !== '' ? `${AIName} Pizza...Yummm!` : ``}</H1>
 
       {AIImage !== '' ? (
-        <img className="mx-auto rounded-md" src={AIImage} alt={AIName} />
+        <>
+          <img className="mx-auto rounded-md" src={AIImage} alt={AIName} />
+          <Paragraph>
+            {AIDescription !== '' ? AIDescription : description}
+          </Paragraph>
+        </>
       ) : (
         <Loader type="dots" />
       )}
-      <Paragraph>
-        {AIDescription !== '' ? AIDescription : description}
-      </Paragraph>
 
       {AIImage !== '' && AIName !== '' && AIDescription !== '' && (
         <Button onClick={handleOrderPizza}>Order Pizza</Button>
