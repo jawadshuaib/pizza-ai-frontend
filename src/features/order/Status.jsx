@@ -51,17 +51,25 @@ export default function Status() {
         dispatch(setHeaderImage(image));
       });
 
+      // getAvailableToppings
       // Get toppings selected
       getToppingsOrdered({ orderId }).then((toppings) => {
         // Save topping ids
         setToppingIds(toppings.map((row) => row.topping_id));
+
+        // setToppings(
+        //   availableToppings
+        //     .filter((row) => {
+        //       return toppings.includes(row.topping);
+        //     })
+        //     .map((row) => row.topping),
+        // );
       });
 
       setLoading(false);
     });
   }, []);
 
-  console.log(toppingIds, orderDetails);
   if (loading) return <Loader reason="Fetching your order details...📦" />;
 
   return (
@@ -70,13 +78,12 @@ export default function Status() {
       <Paragraph>
         You asked for a pizza with the toppings: {toppingIds.join(', ')}.
       </Paragraph>
-      <Paragraph>Here is what we made for you:</Paragraph>
-      <Paragraph>
-        <div className="bg-yellow-300 rounded-md p-3">
-          <span className="font-bold">{orderDetails['pizza_name']}:</span>{' '}
-          {orderDetails['ai_description']}
-        </div>
+      <Paragraph>Here is what 🤖 made for you:</Paragraph>
+      <Paragraph custom="bg-yellow-200 rounded-md p-3">
+        <span className="font-bold">{orderDetails['pizza_name']}:</span>{' '}
+        {orderDetails['ai_description']}
       </Paragraph>
+
       <Paragraph>
         Your pizza has been mailed to <strong>{orderDetails['email']}</strong>.
       </Paragraph>
