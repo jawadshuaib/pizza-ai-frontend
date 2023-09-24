@@ -9,7 +9,6 @@ import {
 } from '../../services/supabase/query';
 import Loader from '../../ui/Loader';
 import { getImageFromSupabase } from '../../services/supabase/upload';
-// import Image from '../../ui/Image';
 import { setHeaderImage, reset as resetOrder } from '../../slices/orderSlice';
 import { reset as resetToppings } from '../../slices/toppingsSlice';
 import { reset as resetPizza } from '../../slices/pizzaSlice';
@@ -21,7 +20,6 @@ export default function Status() {
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState({});
   const [toppingIds, setToppingIds] = useState([]);
-  // const [image, setImage] = useState('');
 
   useEffect(() => {
     if (orderId === '') return;
@@ -29,7 +27,7 @@ export default function Status() {
     getOrderDetails({ orderId }).then((order) => {
       if (order === null) return;
 
-      // Reset redux stores
+      // Reset all redux stores
       dispatch(resetOrder());
       dispatch(resetPizza());
       dispatch(resetToppings());
@@ -49,9 +47,7 @@ export default function Status() {
 
       // Download image from supabase storage
       getImageFromSupabase(order[0]['image_url']).then((image) => {
-        // Save image
-        // setImage(image);
-
+        // Show image as UI header
         dispatch(setHeaderImage(image));
       });
 
@@ -71,8 +67,19 @@ export default function Status() {
   return (
     <>
       <H1>Order Completed!</H1>
-      <Paragraph>Your pizza has been mailed.</Paragraph>
-      {/* {image !== '' && <Image src={image} alt={orderDetails['pizza_name']} />} */}
+      <Paragraph>
+        You asked for a pizza with the toppings: {toppingIds.join(', ')}.
+      </Paragraph>
+      <Paragraph>Here is what we made for you:</Paragraph>
+      <Paragraph>
+        <div className="bg-yellow-300 rounded-md p-3">
+          <span className="font-bold">{orderDetails['pizza_name']}:</span>{' '}
+          {orderDetails['ai_description']}
+        </div>
+      </Paragraph>
+      <Paragraph>
+        Your pizza has been mailed to <strong>{orderDetails['email']}</strong>.
+      </Paragraph>
     </>
   );
 }
