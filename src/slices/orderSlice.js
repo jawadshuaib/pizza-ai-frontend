@@ -10,6 +10,7 @@ const initialState = {
   upload: [],
   order: [],
   orderToppings: [],
+  headerImage: '',
   completed: false,
 };
 
@@ -32,6 +33,17 @@ const orderReducer = createSlice({
     setCompleted(state, action) {
       state.completed = action.payload;
     },
+    setHeaderImage(state, action) {
+      state.headerImage = action.payload;
+    },
+    reset(state) {
+      state.customer = [];
+      state.upload = [];
+      state.order = [];
+      state.orderToppings = [];
+      state.headerImage = '';
+      state.completed = false;
+    },
   },
 });
 
@@ -43,6 +55,8 @@ export const {
   setUpload,
   setOrderToppings,
   setCompleted,
+  setHeaderImage,
+  reset,
 } = orderReducer.actions;
 
 export function createOrder({

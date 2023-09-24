@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Card from './Card';
 import Loader from './Loader';
-import HeaderImage from '../assets/header.png';
+import midJourneyImage from '../assets/header.png';
 import { useSelector } from 'react-redux';
 import FlagError from './FlagError';
 
@@ -14,13 +14,13 @@ export default function AppLayout() {
   const apiError = useSelector((store) => store.error.isError);
   const loadingReason = useSelector((store) => store.loading.reason);
   const isLoading = navigate.state === 'loading' || apiLoading;
-  const AIImage = useSelector((store) => store.pizza.AIImage);
+  const generatedImage = useSelector((store) => store.order.headerImage);
 
   // Show the AI generated pizza image if available
   const headerImage =
-    location.pathname.includes('/order/') && AIImage !== ''
-      ? AIImage
-      : HeaderImage;
+    location.pathname.includes('/order/') && generatedImage !== ''
+      ? generatedImage
+      : midJourneyImage;
 
   function handleBannerClick() {
     navigate('/');

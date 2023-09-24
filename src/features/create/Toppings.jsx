@@ -5,10 +5,7 @@ import { updateSelectedToppings } from '../../slices/toppingsSlice';
 import Checkbox from '../../ui/Checkbox';
 import Button from '../../ui/Button';
 import H1 from '../../ui/H1';
-import {
-  generateAndSetAIImage,
-  setAISuggestions,
-} from '../../slices/pizzaSlice';
+import { setAIImage, setAISuggestions } from '../../slices/pizzaSlice';
 import Paragraph from '../../ui/Paragraph';
 
 export default function Toppings() {
@@ -63,7 +60,7 @@ export default function Toppings() {
     // Save selected options to Redux store
     dispatch(updateSelectedToppings(selectedToppings));
     dispatch(setAISuggestions(selectedToppings));
-    dispatch(generateAndSetAIImage(selectedToppings));
+    dispatch(setAIImage(selectedToppings));
 
     navigate('/create-pizza/preview');
   }

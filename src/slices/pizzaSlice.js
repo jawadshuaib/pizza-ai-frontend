@@ -5,6 +5,7 @@ import askAI from '../services/openai/ask-ai';
 import generateImage, {
   createImagePrompt,
 } from '../services/openai/generate-image';
+import { setHeaderImage } from './orderSlice';
 
 const initialState = {
   description: '',
@@ -29,20 +30,27 @@ const pizzaReducer = createSlice({
     setAIImage(state, action) {
       state.AIImage = action.payload;
     },
+    reset(state) {
+      state.description = '';
+      state.AIName = '';
+      state.AIDescription = '';
+      state.AIImage = '';
+    },
   },
 });
 
 export default pizzaReducer.reducer;
 
-export const { saveDescription, setAIImage } = pizzaReducer.actions;
+export const { saveDescription, reset } = pizzaReducer.actions;
 
-export function generateAndSetAIImage(toppings) {
+export function setAIImage(toppings) {
   return async function (dispatch) {
     dispatch(setLoading([true, 'Creating preview...']));
     const imagePrompt = createImagePrompt(toppings);
     try {
       const imageUrl = await generateImage(imagePrompt);
       dispatch(pizzaReducer.actions.setAIImage(imageUrl));
+      dispatch(setHeaderImage(imageUrl));
     } catch (error) {
       dispatch(
         setError([

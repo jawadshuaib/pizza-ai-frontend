@@ -10,7 +10,9 @@ import {
 import Loader from '../../ui/Loader';
 import { getImageFromSupabase } from '../../services/supabase/upload';
 // import Image from '../../ui/Image';
-import { setAIImage } from '../../slices/pizzaSlice';
+import { setHeaderImage, reset as resetOrder } from '../../slices/orderSlice';
+import { reset as resetToppings } from '../../slices/toppingsSlice';
+import { reset as resetPizza } from '../../slices/pizzaSlice';
 import { useDispatch } from 'react-redux';
 
 export default function Status() {
@@ -26,6 +28,11 @@ export default function Status() {
 
     getOrderDetails({ orderId }).then((order) => {
       if (order === null) return;
+
+      // Reset redux stores
+      dispatch(resetOrder());
+      dispatch(resetPizza());
+      dispatch(resetToppings());
 
       // Save order details
       setOrderDetails(order[0]);
@@ -45,7 +52,7 @@ export default function Status() {
         // Save image
         // setImage(image);
 
-        dispatch(setAIImage(image));
+        dispatch(setHeaderImage(image));
       });
 
       // Get toppings selected
@@ -58,8 +65,7 @@ export default function Status() {
     });
   }, []);
 
-  console.log(orderDetails, toppingIds);
-
+  console.log(toppingIds, orderDetails);
   if (loading) return <Loader reason="Fetching your order details...📦" />;
 
   return (

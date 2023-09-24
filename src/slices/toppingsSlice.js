@@ -27,6 +27,10 @@ const toppingsReducer = createSlice({
     updateSelectedToppings(state, action) {
       state.selected = toLowerCaseArray(action.payload);
     },
+    reset(state) {
+      state.selected = [];
+      state.suggested = [];
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   updateSelectedToppings,
   setShowAllToppings,
   setAvailableToppings,
+  reset,
 } = toppingsReducer.actions;
 
 export function setSuggestedToppings(allToppings = [], input) {
