@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import H1 from '../../ui/H1';
 import Paragraph from '../../ui/Paragraph';
-import {
+import getAvailableToppings, {
   getCustomerDetails,
   getOrderDetails,
   getToppingsOrdered,
@@ -19,7 +19,7 @@ export default function Status() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState({});
-  const [toppingIds, setToppingIds] = useState([]);
+  const [toppings, setToppings] = useState([]);
 
   useEffect(() => {
     if (orderId === '') return;
@@ -53,8 +53,19 @@ export default function Status() {
         dispatch(setHeaderImage(image));
 
         // ## Fetch toppings selected ##
-        const toppings = await getToppingsOrdered({ orderId });
-        setToppingIds(toppings.map((row) => row.topping_id));
+        const toppingIds = await getToppingsOrdered({ orderId });
+        const toppingIdsArr = toppingIds.map((topping) => topping.topping_id);
+
+        const availableToppings = await getAvailableToppings();
+
+        // Name of toppings selected
+        setToppings(
+          availableToppings
+            .filter((available) => {
+              return toppingIdsArr.includes(available.topping_id);
+            })
+            .map((available) => available.topping),
+        );
       } catch (error) {
         console.log(error);
       }
@@ -70,7 +81,7 @@ export default function Status() {
     <>
       <H1>Order Completed!</H1>
       <Paragraph>
-        You asked for a pizza with the toppings: {toppingIds.join(', ')}.
+        You asked for a pizza with the toppings: {toppings.join(', ')}.
       </Paragraph>
       <Paragraph>Here is what 🤖 made for you:</Paragraph>
       <Paragraph custom="bg-yellow-200 rounded-md p-3">
