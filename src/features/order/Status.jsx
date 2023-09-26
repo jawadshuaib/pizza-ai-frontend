@@ -13,6 +13,7 @@ import { setHeaderImage, reset as resetOrder } from '../../slices/orderSlice';
 import { reset as resetToppings } from '../../slices/toppingsSlice';
 import { reset as resetPizza } from '../../slices/pizzaSlice';
 import { useDispatch } from 'react-redux';
+import sendEmail from '../../services/send-email';
 
 export default function Status() {
   const { orderId } = useParams();
@@ -79,31 +80,45 @@ export default function Status() {
   if (loading) return <Loader reason="Fetching your order details...📦" />;
   if (error !== '') return <Paragraph>{error}</Paragraph>;
 
-  const sendEmail = async () => {
-    try {
-      const response = await fetch('/.netlify/functions/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: 'biohazard@gmail.com',
-          subject: 'Jawad testing',
-          text: 'This is a test email from SendGrid.',
-        }),
+  // const sendEmail = async () => {
+  //   try {
+  //     const response = await fetch('/.netlify/functions/send-email', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         to: 'biohazard@gmail.com',
+  //         subject: 'Jawad testing',
+  //         text: 'This is a test email from SendGrid.',
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok' + response.statusText);
+  //     }
+  //     alert('Email sent successfully!');
+  //   } catch (error) {
+  //     console.error(
+  //       'There has been a problem with your fetch operation:',
+  //       error,
+  //     );
+  //   }
+  // };
+
+  function handleSendEmail() {
+    const fn = async () => {
+      const response = await sendEmail({
+        to: 'biohazard@gmail.com',
+        subject: 'Jawad testing',
+        text: 'This is a test email from SendGrid.',
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok' + response.statusText);
-      }
-      alert('Email sent successfully!');
-    } catch (error) {
-      console.error(
-        'There has been a problem with your fetch operation:',
-        error,
-      );
-    }
-  };
+      console.log(response.status);
+    };
+
+    fn();
+  }
 
   return (
     <>
@@ -120,7 +135,7 @@ export default function Status() {
       <Paragraph>
         Your pizza has been mailed to <strong>{orderDetails['email']}</strong>.
       </Paragraph>
-      <button onClick={sendEmail}>Send Email</button>
+      <button onClick={handleSendEmail}>Send Email</button>
     </>
   );
 }
