@@ -12,4 +12,4 @@
 
 The send email part of the app relies on netlify functions backend. The server has to be running under netlify-cli. So run it, use the following command:
 
-    $npm netlify dev
+    $ netlify dev

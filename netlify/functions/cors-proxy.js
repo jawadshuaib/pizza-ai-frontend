@@ -2,9 +2,10 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function (event) {
-  const imageUrl = event.queryStringParameters.url;
+  const url = event.queryStringParameters.url;
+  const contentType = event.queryStringParameters.contentType;
 
-  if (!imageUrl) {
+  if (!url) {
     return {
       statusCode: 400,
       body: 'url parameter is required',
@@ -12,13 +13,13 @@ exports.handler = async function (event) {
   }
 
   try {
-    const response = await fetch(imageUrl);
+    const response = await fetch(url);
     const buffer = await response.buffer();
 
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'image/png',
+        'Content-Type': contentType === undefined ? 'image/png' : contentType,
         'Access-Control-Allow-Origin': '*',
       },
       body: buffer.toString('base64'),
@@ -27,7 +28,7 @@ exports.handler = async function (event) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: 'Error fetching image.',
+      body: 'Error fetching content.',
     };
   }
 };

@@ -111,13 +111,17 @@ export default function Status() {
       const response = await sendEmail({
         to: 'biohazard@gmail.com',
         subject: 'Jawad testing',
-        text: 'This is a test email from SendGrid.',
+        orderId: '55c9ddd8-7627-4440-84f0-89b3728cab64',
       });
 
-      console.log(response.status);
+      console.log(response);
     };
 
-    fn();
+    try {
+      fn();
+    } catch (err) {
+      console.log(`There was an error: ${err}`);
+    }
   }
 
   return (
