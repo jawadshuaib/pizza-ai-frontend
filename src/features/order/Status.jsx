@@ -18,6 +18,7 @@ export default function Status() {
   const { orderId } = useParams();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [orderDetails, setOrderDetails] = useState({});
   const [toppings, setToppings] = useState([]);
 
@@ -66,8 +67,8 @@ export default function Status() {
             })
             .map((available) => available.topping),
         );
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        setError(err);
       }
     };
 
@@ -76,6 +77,33 @@ export default function Status() {
   }, []);
 
   if (loading) return <Loader reason="Fetching your order details...📦" />;
+  if (error !== '') return <Paragraph>{error}</Paragraph>;
+
+  const sendEmail = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'biohazard@gmail.com',
+          subject: 'Jawad testing',
+          text: 'This is a test email from SendGrid.',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok' + response.statusText);
+      }
+      alert('Email sent successfully!');
+    } catch (error) {
+      console.error(
+        'There has been a problem with your fetch operation:',
+        error,
+      );
+    }
+  };
 
   return (
     <>
@@ -92,6 +120,7 @@ export default function Status() {
       <Paragraph>
         Your pizza has been mailed to <strong>{orderDetails['email']}</strong>.
       </Paragraph>
+      <button onClick={sendEmail}>Send Email</button>
     </>
   );
 }
