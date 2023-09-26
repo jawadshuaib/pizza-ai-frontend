@@ -7,6 +7,12 @@ export const corsProxy = {
   remote: '/.netlify/functions/cors-proxy',
 };
 
+export const info = {
+  name: 'Pizza AI',
+  description: 'A pizza ordering app powered by AI',
+  email: 'jawad.php@gmail.com',
+  url: 'https://pizza-ai.netlify.app/',
+};
 export default {
   mode,
   corsProxy,

@@ -1,47 +1,40 @@
+import { info } from '../utils/settings';
+
 // This calls the node file in netlify/functions/send-email.js
-export default async function sendEmail({ to, subject, orderId }) {
-  // try {
-  const response = await fetch('/.netlify/functions/send-email', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      useCors: false,
-      from: 'jawad.php@gmail.com',
-      to,
-      subject,
-      orderId,
-    }),
-  });
+export default async function sendEmail({ to, from, subject, text }) {
+  try {
+    const response = await fetch('/.netlify/functions/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to,
+        from,
+        subject,
+        text,
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error('Network response was not ok' + response.statusText);
+    if (!response.ok) {
+      throw new Error('Network response was not ok: ' + response.statusText);
+    }
+    return response;
+  } catch (error) {
+    return { error: error.message };
   }
-  //   return response;
-  // } catch (error) {
-  //   console.error('There has been a problem with your fetch operation:', error);
-  // }
-
-  // try {
-  //   const response = await fetch('/.netlify/functions/send-email', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       to,
-  //       subject,
-  //       text,
-  //     }),
-  //   });
-
-  //   if (!response.ok) {
-  //     throw new Error('Network response was not ok' + response.statusText);
-  //   }
-
-  //   return response;
-  // } catch (error) {
-  //   return { error: error.message };
-  // }
 }
+
+export const prepareEmail = ({ orderId, pizzaName }) => {
+  const orderUrl = info.url + 'order/status/' + orderId;
+  const text = `
+  Your order has been completed: ${orderUrl}`;
+  const subject =
+    pizzaName !== '' ? 'Pizza Order for ' + pizzaName : 'Pizza order complete';
+
+  return {
+    from: info.email,
+    text,
+    subject,
+  };
+};
