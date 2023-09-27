@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+// Selectors
 import { useAppSelectors } from '../../hooks/useAppSelectors';
+// UI
 import { H1, Button, Loader, Paragraph, Image } from '../../ui';
 
 export default function Preview() {

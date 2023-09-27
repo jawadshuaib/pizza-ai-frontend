@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-// Services
-import { getAvailableToppings } from '../../services';
 // UI
 import { H1, Button } from '../../ui';
 // Slices
-import { saveDescription } from '../../slices/pizzaSlice';
 import {
+  saveDescription,
   setAvailableToppings,
   setSuggestedToppings,
-} from '../../slices/toppingsSlice';
+} from '../../slices';
+// Services
+import { getAvailableToppings } from '../../services';
 
 export default function Describe() {
   const defaultDescription =

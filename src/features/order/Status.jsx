@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+// UI
+import { H1, Loader, Paragraph } from '../../ui';
+// Slices
+import {
+  setHeaderImage,
+  resetOrder,
+  resetToppings,
+  resetPizza,
+} from '../../slices';
 // Services
 import {
   getAvailableToppings,
@@ -10,12 +19,6 @@ import {
   getToppingsOrdered,
   getImageFromSupabase,
 } from '../../services';
-// UI
-import { H1, Loader, Paragraph } from '../../ui';
-// Slices
-import { setHeaderImage, reset as resetOrder } from '../../slices/orderSlice';
-import { reset as resetToppings } from '../../slices/toppingsSlice';
-import { reset as resetPizza } from '../../slices/pizzaSlice';
 
 export default function Status() {
   const { orderId } = useParams();
