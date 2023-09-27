@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelectors } from '../../hooks/useAppSelectors';
-import H1 from '../../ui/H1';
-import Button from '../../ui/Button';
-import Loader from '../../ui/Loader';
-import Paragraph from '../../ui/Paragraph';
-import Image from '../../ui/Image';
+import { H1, Button, Loader, Paragraph, Image } from '../../ui';
 
 export default function Preview() {
   const navigate = useNavigate();

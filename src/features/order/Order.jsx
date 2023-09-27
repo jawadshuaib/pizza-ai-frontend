@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import Loader from '../../ui/Loader';
 import { useDispatch } from 'react-redux';
-import { createOrder } from '../../slices/orderSlice';
-import { setError } from '../../slices/errorSlice';
 import { useNavigate } from 'react-router-dom';
+// Utils
 import { info } from '../../utils/settings';
 import { isValidEmail } from '../../utils/common';
-import email, { prepareEmail } from '../../services/email';
-import Button from '../../ui/Button';
-import Input from '../../ui/Input';
-import Paragraph from '../../ui/Paragraph';
-import H1 from '../../ui/H1';
+// Services
+// import email, { prepareEmail } from '../../services/email';
+import { email, prepareEmail } from '../../services';
+// UI
+import { H1, Button, Loader, Paragraph, Input } from '../../ui';
+// Slices
+import { createOrder } from '../../slices/orderSlice';
+import { setError } from '../../slices/errorSlice';
+// Selectors
 import { useAppSelectors } from '../../hooks/useAppSelectors';
 
 export default function Order() {

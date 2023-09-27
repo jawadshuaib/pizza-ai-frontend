@@ -1,7 +1,7 @@
 import { info } from '../utils/settings';
 
 // This calls the node file in netlify/functions/send-email.js
-export default async function email({ to, from, subject, text }) {
+export async function email({ to, from, subject, text }) {
   try {
     const response = await fetch('/.netlify/functions/send-email', {
       method: 'POST',
@@ -38,3 +38,5 @@ export const prepareEmail = ({ orderId, pizzaName, imageUrl }) => {
     subject,
   };
 };
+
+export default email;

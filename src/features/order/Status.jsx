@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import H1 from '../../ui/H1';
-import Paragraph from '../../ui/Paragraph';
-import getAvailableToppings, {
+import { useDispatch } from 'react-redux';
+// Services
+import {
+  getAvailableToppings,
   getCustomerDetails,
   getOrderDetails,
   doesOrderExist,
   getToppingsOrdered,
-} from '../../services/supabase/query';
-import Loader from '../../ui/Loader';
-import { getImageFromSupabase } from '../../services/supabase/upload';
+  getImageFromSupabase,
+} from '../../services';
+// UI
+import { H1, Loader, Paragraph } from '../../ui';
+// Slices
 import { setHeaderImage, reset as resetOrder } from '../../slices/orderSlice';
 import { reset as resetToppings } from '../../slices/toppingsSlice';
 import { reset as resetPizza } from '../../slices/pizzaSlice';
-import { useDispatch } from 'react-redux';
 
 export default function Status() {
   const { orderId } = useParams();

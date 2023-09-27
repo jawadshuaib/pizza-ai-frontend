@@ -1,6 +1,6 @@
 import supabase from './supabase';
 
-export default async function getAvailableToppings() {
+export async function getAvailableToppings() {
   const { data } = await supabase.from('toppings').select();
   return data;
 }
@@ -54,6 +54,7 @@ export async function getToppingsOrdered({ orderId }) {
   return data;
 }
 
+export default getAvailableToppings;
 /*
 --- How to query Supabase ---
   const handleGetAllToppings = () => {

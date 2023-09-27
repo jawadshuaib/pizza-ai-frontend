@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateSelectedToppings } from '../../slices/toppingsSlice';
-import { useAppSelectors } from '../../hooks/useAppSelectors';
-import Checkbox from '../../ui/Checkbox';
-import Button from '../../ui/Button';
-import H1 from '../../ui/H1';
+// UI
+import { H1, Button, Checkbox, Paragraph } from '../../ui';
+// Slices
 import { setAIImage, setAISuggestions } from '../../slices/pizzaSlice';
-import Paragraph from '../../ui/Paragraph';
+import { updateSelectedToppings } from '../../slices/toppingsSlice';
+// Selectors
+import { useAppSelectors } from '../../hooks/useAppSelectors';
 
 export default function Toppings() {
   const navigate = useNavigate();

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+// Services
+import { getAvailableToppings } from '../../services';
+// UI
+import { H1, Button } from '../../ui';
+// Slices
 import { saveDescription } from '../../slices/pizzaSlice';
-import getAvailableToppings from '../../services/supabase/query';
-import Button from '../../ui/Button';
-import H1 from '../../ui/H1';
 import {
   setAvailableToppings,
   setSuggestedToppings,
