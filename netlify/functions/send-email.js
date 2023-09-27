@@ -14,7 +14,7 @@ exports.handler = async function (event) {
     to,
     from,
     subject,
-    text,
+    html: text,
   };
 
   try {

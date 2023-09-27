@@ -7,7 +7,7 @@ export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy
   // Add proxy to image url
   const baseUrl = mode.isDevelopment ? corsProxy.local : corsProxy.remote;
-  imageUrl = `${baseUrl}?url=${imageUrl}`;
+  imageUrl = `${baseUrl}${imageUrl}`;
   // fetch image blob
   const blob = await fetchImageBlob(imageUrl);
   // convert blob to file

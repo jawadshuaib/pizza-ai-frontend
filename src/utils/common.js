@@ -26,10 +26,15 @@ function blobToFile(blob, fileName = 'temp-name.png') {
   return new File([blob], fileName, { type: 'image/png' });
 }
 
+function isValidEmail(email) {
+  const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailReg.test(email);
+}
 export {
   strToKey,
   toLowerCaseArray,
   capitalizeFirstLetters,
   fetchImageBlob,
   blobToFile,
+  isValidEmail,
 };

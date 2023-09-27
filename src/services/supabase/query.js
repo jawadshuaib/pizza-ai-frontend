@@ -14,6 +14,22 @@ export async function getSimilarToppings(embedding) {
   return data;
 }
 
+// Check if order exists
+export async function doesOrderExist({ orderId }) {
+  try {
+    const { count, error } = await supabase
+      .from('orders')
+      .select('order_id', { count: 'exact' })
+      .eq('order_id', orderId);
+
+    if (error) throw error;
+
+    return { result: count > 0, error: null };
+  } catch (error) {
+    return { result: null, error }; // Return the error along with a null result
+  }
+}
+
 export async function getOrderDetails({ orderId }) {
   const { data } = await supabase
     .from('orders')

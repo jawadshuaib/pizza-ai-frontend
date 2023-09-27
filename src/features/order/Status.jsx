@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import H1 from '../../ui/H1';
 import Paragraph from '../../ui/Paragraph';
 import getAvailableToppings, {
   getCustomerDetails,
   getOrderDetails,
+  doesOrderExist,
   getToppingsOrdered,
 } from '../../services/supabase/query';
 import Loader from '../../ui/Loader';
@@ -13,11 +14,11 @@ import { setHeaderImage, reset as resetOrder } from '../../slices/orderSlice';
 import { reset as resetToppings } from '../../slices/toppingsSlice';
 import { reset as resetPizza } from '../../slices/pizzaSlice';
 import { useDispatch } from 'react-redux';
-import sendEmail, { prepareEmail } from '../../services/send-email';
 
 export default function Status() {
   const { orderId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [orderDetails, setOrderDetails] = useState({});
@@ -28,6 +29,13 @@ export default function Status() {
 
     const fetchOrder = async () => {
       try {
+        // ## Check if order exists ##
+        const { result: orderExists } = await doesOrderExist({ orderId });
+        if (orderExists !== true) {
+          navigate('/');
+          return;
+        }
+
         // ## Fetch order details ##
         const order = await getOrderDetails({ orderId });
         if (order === null) return;
@@ -80,28 +88,6 @@ export default function Status() {
   if (loading) return <Loader reason="Fetching your order details...📦" />;
   if (error !== '') return <Paragraph>{error}</Paragraph>;
 
-  function handleSendEmail() {
-    const { from, subject, text } = prepareEmail({
-      orderId,
-      pizzaName: orderDetails['pizza_name'],
-    });
-
-    const fn = async () => {
-      await sendEmail({
-        to: 'biohazard@gmail.com',
-        from,
-        subject,
-        text,
-      });
-    };
-
-    try {
-      fn();
-    } catch (err) {
-      console.log(`There was an error: ${err}`);
-    }
-  }
-
   return (
     <>
       <H1>Order Completed!</H1>
@@ -117,7 +103,6 @@ export default function Status() {
       <Paragraph>
         Your pizza has been mailed to <strong>{orderDetails['email']}</strong>.
       </Paragraph>
-      <button onClick={handleSendEmail}>Send Email</button>
     </>
   );
 }

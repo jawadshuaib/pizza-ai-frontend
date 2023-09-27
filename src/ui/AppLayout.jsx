@@ -3,18 +3,15 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Card from './Card';
 import Loader from './Loader';
 import midJourneyImage from '../assets/header.png';
-import { useSelector } from 'react-redux';
 import FlagError from './FlagError';
+import { useAppSelectors } from '../hooks/useAppSelectors';
 
 export default function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const apiLoading = useSelector((store) => store.loading.isLoading);
-  // Listen to errors relating to API loading
-  const apiError = useSelector((store) => store.error.isError);
-  const loadingReason = useSelector((store) => store.loading.reason);
+  const { apiLoading, apiError, loadingReason, generatedImage } =
+    useAppSelectors();
   const isLoading = navigate.state === 'loading' || apiLoading;
-  const generatedImage = useSelector((store) => store.order.headerImage);
 
   // Show the AI generated pizza image if available
   const headerImage =

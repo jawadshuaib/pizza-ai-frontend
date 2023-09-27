@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateSelectedToppings } from '../../slices/toppingsSlice';
+import { useAppSelectors } from '../../hooks/useAppSelectors';
 import Checkbox from '../../ui/Checkbox';
 import Button from '../../ui/Button';
 import H1 from '../../ui/H1';
@@ -11,10 +12,7 @@ import Paragraph from '../../ui/Paragraph';
 export default function Toppings() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const availableToppings = useSelector((store) => store.toppings.available);
-  const suggestedToppings = useSelector((store) => store.toppings.suggested);
-
+  const { availableToppings, suggestedToppings } = useAppSelectors();
   const [showAllOptionsBtn, setShowAllOptionsBtn] = useState(true);
   const [toppings, setToppings] = useState([]);
 

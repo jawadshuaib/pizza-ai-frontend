@@ -12,7 +12,11 @@ export const info = {
   description: 'A pizza ordering app powered by AI',
   email: 'jawad.php@gmail.com',
   url: 'https://pizza-ai.netlify.app/',
+  supabaseImagePath:
+    import.meta.env.VITE_SUPABASE_URL +
+    `/storage/v1/object/public/pizza-images`,
 };
+
 export default {
   mode,
   corsProxy,

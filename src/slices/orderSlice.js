@@ -117,7 +117,6 @@ export function createOrder({
 
       dispatch(setLoading([false, '']));
     } catch (error) {
-      console.log(error);
       dispatch(
         setError([
           true,
