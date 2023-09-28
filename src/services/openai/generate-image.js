@@ -32,7 +32,7 @@ async function sendRequest({ token, prompt, n, size }) {
 export default function generateImage(prompt) {
   const token = mode.isDevelopment
     ? import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI
-    : null;
+    : import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI;
   return sendRequest({
     token,
     prompt,
