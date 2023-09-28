@@ -15,7 +15,8 @@ export async function handler(event) {
 
   try {
     const response = await fetch(url);
-    const buffer = await response.response.arrayBuffer();
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
     return {
       statusCode: 200,
