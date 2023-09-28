@@ -11,8 +11,10 @@ export async function fetchAndUploadImage(imageUrl) {
   imageUrl = `${baseUrl}${imageUrl}`;
   // fetch image blob
   const blob = await fetchImageBlob(imageUrl);
+  console.log(blob);
   // convert blob to file
   const file = blobToFile(blob);
+  console.log(file);
   // upload image to Supabase Storage
   return await uploadImageToSupabase(file);
 }

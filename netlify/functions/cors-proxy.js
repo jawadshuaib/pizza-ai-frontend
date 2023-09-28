@@ -12,7 +12,7 @@ export async function handler(event) {
       body: 'url parameter is required',
     };
   }
-
+  // console.log('URL IS:' + url);
   try {
     const response = await fetch(url);
     const arrayBuffer = await response.arrayBuffer();
@@ -21,10 +21,7 @@ export async function handler(event) {
     return {
       statusCode: 200,
       headers: {
-        'Content-Type':
-          contentType === undefined || contentType === ''
-            ? 'image/png'
-            : contentType,
+        'Content-Type': contentType === undefined ? 'image/png' : contentType,
         'Access-Control-Allow-Origin': '*',
       },
       body: buffer.toString('base64'),
