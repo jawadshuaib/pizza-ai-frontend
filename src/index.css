@@ -4,6 +4,8 @@
 
 body {
   background-image: url('assets/bg-pattern.webp');
+
+  font-family: 'Onest', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
