@@ -8,10 +8,4 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['js-big-decimal'],
   },
-  build: {
-    ssr: 'src/entry-server.js', // Path to SSR entry point
-    rollupOptions: {
-      input: 'src/entry-server.js', // should point to a JS or TS file
-    },
-  },
 });
