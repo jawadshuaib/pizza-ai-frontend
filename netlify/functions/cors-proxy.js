@@ -1,7 +1,8 @@
 /* eslint-env node */
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async function (event) {
+export async function handler(event) {
   const url = event.queryStringParameters.url;
   const contentType = event.queryStringParameters.contentType;
 
@@ -14,12 +15,15 @@ exports.handler = async function (event) {
 
   try {
     const response = await fetch(url);
-    const buffer = await response.buffer();
+    const buffer = await response.response.arrayBuffer();
 
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': contentType === undefined ? 'image/png' : contentType,
+        'Content-Type':
+          contentType === undefined || contentType === ''
+            ? 'image/png'
+            : contentType,
         'Access-Control-Allow-Origin': '*',
       },
       body: buffer.toString('base64'),
@@ -31,4 +35,4 @@ exports.handler = async function (event) {
       body: 'Error fetching content.',
     };
   }
-};
+}

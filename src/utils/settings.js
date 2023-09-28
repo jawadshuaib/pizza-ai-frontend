@@ -4,7 +4,7 @@ export const mode = {
 
 export const corsProxy = {
   local: 'https://cors-anywhere.herokuapp.com/',
-  remote: '/.netlify/functions/cors-proxy/',
+  remote: '/.netlify/functions/cors-proxy?url=',
 };
 
 export const info = {
