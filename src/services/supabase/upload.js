@@ -6,7 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy
   // Add proxy to image url
-  const baseUrl = mode.isDevelopment ? corsProxy.local : corsProxy.remote;
+  // const baseUrl = mode.isDevelopment ? corsProxy.local : corsProxy.remote;
+  const baseUrl = mode.isDevelopment ? corsProxy.local : '';
   imageUrl = `${baseUrl}${imageUrl}`;
   // fetch image blob
   const blob = await fetchImageBlob(imageUrl);
