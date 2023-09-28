@@ -3,10 +3,18 @@ import OpenAI from 'openai';
 import { mode } from '../../utils/settings';
 
 async function sendRequest({ token, prompt, n, size }) {
-  const openai = new OpenAI({
-    apiKey: token, // defaults to process.env["OPENAI_API_KEY"]
-    dangerouslyAllowBrowser: true,
-  });
+  let openai;
+  if (token === null) {
+    // defaults token to process.env["OPENAI_API_KEY"]
+    openai = new OpenAI({
+      dangerouslyAllowBrowser: true,
+    });
+  } else {
+    openai = new OpenAI({
+      apiKey: token,
+      dangerouslyAllowBrowser: true,
+    });
+  }
 
   const imageParams = {
     prompt,
