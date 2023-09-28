@@ -19,6 +19,7 @@ export default function Card({
         className="rounded-t-lg cursor-pointer min-w-[768px] max-h-[469px] object-contain"
         src={headerImage}
         alt={alt}
+        loading="lazy"
       />
 
       <div className="p-6 px-20">{children}</div>
