@@ -52,7 +52,7 @@ export default function Toppings() {
 
   function handleShowAllToppings() {
     // Show all available toppings
-    setToppings(() => availableToppings);
+    setToppings(() => availableToppings.map((row) => row.topping));
     // Hide button after user clicks it
     setShowAllOptionsBtn(false);
   }
