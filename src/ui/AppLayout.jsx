@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Card from './Card';
 import Loader from './Loader';
 import midJourneyImage from '../assets/header.png';
 import FlagError from './FlagError';
+// Selectors
 import { useAppSelectors } from '../hooks/useAppSelectors';
+// Slices
+import { setLoading } from '../slices';
 
 export default function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { apiLoading, apiError, loadingReason, generatedImage } =
-    useAppSelectors();
+  const dispatch = useDispatch();
+  const {
+    isLoading: apiLoading,
+    apiError,
+    loadingReason,
+    generatedImage,
+  } = useAppSelectors();
+
+  useEffect(() => {
+    if (apiError) {
+      // Stop showing the loader if there is an error
+      dispatch(setLoading([false]));
+    }
+  }, [apiError]);
+
   const isLoading = navigate.state === 'loading' || apiLoading;
 
   // Show the AI generated pizza image if available

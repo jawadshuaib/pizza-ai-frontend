@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { setLoading } from './loadingSlice';
 import { toLowerCaseArray } from '../utils/common';
 import askAI from '../services/openai/ask-ai';
+import { setLoading } from './loadingSlice';
 import { setError } from './errorSlice';
 
 const initialState = {

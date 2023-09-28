@@ -19,6 +19,7 @@ export default function Order() {
   const [customerEmail, setCustomerEmail] = useState('biohazard@gmail.com');
   // Border for input
   const [red, setRed] = useState(false);
+  // Selectors
   const {
     AIName,
     AIImage,
@@ -51,6 +52,7 @@ export default function Order() {
       const to = customer[0]['email'];
       const pizzaName = order[0]['pizza_name'];
       const imageUrl = `${info.supabaseImagePath}/${order[0]['image_url']}`;
+
       sendEmail(orderId, to, pizzaName, imageUrl)
         .then(() => {
           navigate(`/order/status/${orderId}`);
@@ -68,7 +70,7 @@ export default function Order() {
     if (isValidEmail(setCustomerEmail)) {
       setRed(false);
     }
-  }, [customerEmail]);
+  }, [customerEmail, orderCompleted]);
 
   const handleSubmitOrder = async () => {
     if (customerEmail === '' || !isValidEmail(customerEmail)) {
@@ -117,21 +119,25 @@ export default function Order() {
 
   return (
     <>
-      {isLoading && <Loader reason={loadingReason} />}
       <H1>Pizza is Ready!</H1>
-      <Paragraph>
-        Enter your email to receive this pizza in your mailbox.
-      </Paragraph>
-      <div className="block">
-        <Input
-          placeholder="name@email.com"
-          type="email"
-          value={customerEmail}
-          borderColor={red ? 'red-500' : 'gray-300'}
-          onChange={(e) => setCustomerEmail(e.target.value)}
-        />
-        <Button onClick={handleSubmitOrder}>Mail My Pizza</Button>
-      </div>
+      {isLoading && <Loader reason={loadingReason} />}
+      {!isLoading && (
+        <>
+          <Paragraph>
+            Enter your email to receive this pizza in your mailbox.
+          </Paragraph>
+          <div className="block">
+            <Input
+              placeholder="name@email.com"
+              type="email"
+              value={customerEmail}
+              borderColor={red ? 'red-500' : 'gray-300'}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+            />
+            <Button onClick={handleSubmitOrder}>Mail My Pizza</Button>
+          </div>
+        </>
+      )}
     </>
   );
 }
