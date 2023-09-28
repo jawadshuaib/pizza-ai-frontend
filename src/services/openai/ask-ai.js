@@ -46,7 +46,7 @@ async function sendRequest({ token, model, context, input, temperature }) {
 export default function askAI({ context, input }) {
   const token = mode.isDevelopment
     ? import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI
-    : null;
+    : import.meta.env.VITE_OPEN_AI_API_KEY_PIZZA_AI;
   return sendRequest({
     token,
     model: 'gpt-3.5-turbo',
