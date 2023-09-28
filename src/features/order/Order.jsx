@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Selectors
 import { useAppSelectors } from '../../hooks/useAppSelectors';
 // Utils
-import { info } from '../../utils/settings';
+import { info, mode } from '../../utils/settings';
 import { isValidEmail } from '../../utils/common';
 // UI
 import { H1, Button, Loader, Paragraph, Input } from '../../ui';
@@ -16,7 +16,9 @@ import { email, prepareEmail } from '../../services';
 export default function Order() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [customerEmail, setCustomerEmail] = useState('');
+  const [customerEmail, setCustomerEmail] = useState(
+    mode.isDevelopment ? 'biohazard@gmail.com' : '',
+  );
   // Border for input
   const [red, setRed] = useState(false);
   // Selectors
