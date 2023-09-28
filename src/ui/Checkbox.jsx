@@ -20,7 +20,7 @@ export default function Checkbox({
     <>
       <div
         className={`${
-          checked ? 'bg-green-100 dark:bg-gray-500' : ''
+          checked ? 'bg-gray-100 dark:bg-gray-500' : ''
         } flex items-center pl-3`}
       >
         <input

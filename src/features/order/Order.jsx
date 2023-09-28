@@ -21,6 +21,7 @@ export default function Order() {
   );
   // Border for input
   const [red, setRed] = useState(false);
+  const [title, setTitle] = useState('Pizza is Ready!');
   // Selectors
   const {
     AIName,
@@ -48,6 +49,8 @@ export default function Order() {
       navigate('/');
       return;
     }
+
+    setTitle(`${AIName} Pizza is Ready!`);
 
     if (orderCompleted) {
       const orderId = order[0]['order_id'];
@@ -121,7 +124,7 @@ export default function Order() {
 
   return (
     <>
-      <H1>Pizza is Ready!</H1>
+      <H1>{title}</H1>
       {isLoading && <Loader reason={loadingReason} />}
       {!isLoading && (
         <>
