@@ -11,7 +11,7 @@ export default function Button({ children, custom = '', onClick = null }) {
     <div className={custom === '' ? 'grid my-3' : custom}>
       <FlowbiteButton
         size="lg"
-        className="bg-orange-500"
+        className="bg-orange-500 dark:text-gray-200"
         onClick={handleOnClick}
       >
         {children}

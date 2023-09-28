@@ -90,7 +90,7 @@ export default function Toppings() {
           </li>
         ))}
         {showAllOptionsBtn && (
-          <li className="p-3 text-blue-600">
+          <li className="p-3 text-blue-600 dark:text-gray-200 dark:hover:text-gray-100">
             <button onClick={handleShowAllToppings}>Show All Options</button>
           </li>
         )}

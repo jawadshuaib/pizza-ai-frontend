@@ -100,7 +100,7 @@ export default function Status() {
         You asked for a pizza with the toppings: {toppings.join(', ')}.
       </Paragraph>
       <Paragraph>Here is what 🤖 made for you:</Paragraph>
-      <Paragraph custom="bg-yellow-200 rounded-md p-3">
+      <Paragraph custom="bg-yellow-200 rounded-md p-3 dark:text-gray-600">
         <span className="font-bold">{orderDetails['pizza_name']}:</span>{' '}
         {orderDetails['ai_description']}
       </Paragraph>

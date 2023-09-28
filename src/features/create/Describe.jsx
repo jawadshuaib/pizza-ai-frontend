@@ -53,13 +53,13 @@ export default function Describe() {
         <>
           <label
             htmlFor="description"
-            className="block mb-2 text-xl text-gray-400 dark:text-white"
+            className="block mb-2 text-xl text-gray-400 dark:text-gray-400"
           >
             What are you craving?
             <textarea
               id="description"
               rows="4"
-              className="block my-3 p-2.5 w-full text-2xl text-center text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block my-3 p-2.5 w-full text-2xl text-center text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder={defaultDescription}
               onChange={(e) => setDescription(e.target.value)}
               value={description}

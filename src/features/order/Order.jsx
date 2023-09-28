@@ -16,7 +16,7 @@ import { email, prepareEmail } from '../../services';
 export default function Order() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [customerEmail, setCustomerEmail] = useState('biohazard@gmail.com');
+  const [customerEmail, setCustomerEmail] = useState('');
   // Border for input
   const [red, setRed] = useState(false);
   // Selectors
