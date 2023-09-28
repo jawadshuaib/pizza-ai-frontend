@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import placeholderImage from '../assets/placeholder.png';
 
 export default function Card({
   children,
@@ -6,6 +7,8 @@ export default function Card({
   headerImage,
   alt = 'Card image',
 }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   function handleClick() {
     onClick();
   }
@@ -17,8 +20,9 @@ export default function Card({
       <img
         onClick={handleClick}
         className="rounded-t-lg cursor-pointer min-w-[768px] max-h-[469px] object-contain"
-        src={headerImage}
+        src={imageLoaded ? headerImage : placeholderImage}
         alt={alt}
+        onLoad={() => setImageLoaded(true)}
         loading="lazy"
       />
 
