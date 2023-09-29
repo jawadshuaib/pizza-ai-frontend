@@ -17,7 +17,7 @@ export default function About() {
       <Paragraph custom="text-left mb-2">
         All sorts of new use cases can be developed. What if, for example, you
         could simply ask a real estate platform to{' '}
-        <span className="text-yellow-300">
+        <span className="text-yellow-500 dark:text-yellow-300">
           find a house near a good school in a quiet neighborhood with a big
           backyard
         </span>
@@ -34,7 +34,7 @@ export default function About() {
           href="https://www.linkedin.com/in/jawadshuaib"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-200 underline hover:text-blue-500"
+          className=" underline hover:text-blue-500 dark:text-blue-200"
         >
           get in touch with me
         </a>
