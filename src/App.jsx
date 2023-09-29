@@ -11,6 +11,7 @@ import Status from './features/order/Status';
 import AppLayout from './ui/AppLayout';
 import Error from './ui/Error';
 import store from './store';
+import About from './features/info/About';
 
 function App() {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ function App() {
         {
           path: '/order/status/:orderId',
           element: <Status />,
+        },
+        {
+          path: '/about',
+          element: <About />,
         },
       ],
     },

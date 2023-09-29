@@ -3,13 +3,14 @@ import placeholderImage from '../assets/placeholder.png';
 
 export default function Card({
   children,
-  onClick,
+  onClick = null,
   headerImage,
   alt = 'Card image',
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   function handleClick() {
+    if (onClick === null) return;
     onClick();
   }
   return (
@@ -19,7 +20,9 @@ export default function Card({
     >
       <img
         onClick={handleClick}
-        className="rounded-t-lg cursor-pointer min-w-[768px] max-h-[469px] object-contain"
+        className={`${
+          onClick !== null && 'cursor-pointer '
+        } rounded-t-lg min-w-[768px] max-h-[469px] object-contain`}
         src={imageLoaded ? headerImage : placeholderImage}
         alt={alt}
         onLoad={() => setImageLoaded(true)}
