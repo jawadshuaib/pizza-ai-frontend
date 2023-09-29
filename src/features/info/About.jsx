@@ -5,36 +5,29 @@ export default function About() {
   return (
     <>
       <Paragraph custom="text-left mb-2">
-        Hi, I created Pizza AI to showcase how to leverage Generative AI to
-        query privately held dataset - in this case, a pizza menu.
+        Hi, I created Pizza AI to showcase the potential for using Generative AI
+        to query privately held dataset - in this case, a pizza menu.
       </Paragraph>
       <Paragraph custom="text-left mb-2">
-        Many technologies fall victim to the Gartner hype cycle. Sometimes,
-        their true potential lays much farther than originally thought
-        (Metaverse, NFT, Blockchain, etc).
-      </Paragraph>
-      <Paragraph custom="text-left mb-2">
-        However, I believe that Generative AI is neither hype nor a fad. It has
-        the potential to increase productivity across domains.
+        Many technologies fall victim to the Gartner hype cycle. However, I
+        believe that Generative AI is neither hype nor a fad. It has the
+        potential to increase productivity across domains.
       </Paragraph>
 
       <Paragraph custom="text-left mb-2">
-        All sorts of new use cases can be developed. For example, instead of
-        navigating through cumbersome filtering options, a real estate platform
-        could allow prospective buyers to simply articulate their housing
-        preferences through natural language:{' '}
+        All sorts of new use cases can be developed. What if, for example, you
+        could simply ask a real estate platform to{' '}
         <span className="text-yellow-300">
-          Find me a house near a good school in a quiet neighborhood with a big
-          backyard.
+          find a house near a good school in a quiet neighborhood with a big
+          backyard
         </span>
+        . Applications like that are just waiting to be built. Which is why I am
+        extremely excited by this tech.
       </Paragraph>
-      <Paragraph custom="text-left mb-2">
+      {/* <Paragraph custom="text-left mb-2">
         Generative AI does away with hours of search, and replaces it with
         intutive natural language based queries.
-      </Paragraph>
-      <Paragraph custom="text-left mb-8">
-        There are endless possibilities. And this is why I am excited!
-      </Paragraph>
+      </Paragraph> */}
       <Paragraph custom="text-left">
         Feel free to{' '}
         <a

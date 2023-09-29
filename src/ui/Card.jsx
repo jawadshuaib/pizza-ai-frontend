@@ -22,7 +22,7 @@ export default function Card({
         onClick={handleClick}
         className={`${
           onClick !== null && 'cursor-pointer '
-        } rounded-t-lg min-w-[768px] max-h-[469px] object-contain`}
+        } rounded-t-lg max-h-[469px] object-contain`}
         src={imageLoaded ? headerImage : placeholderImage}
         alt={alt}
         onLoad={() => setImageLoaded(true)}
