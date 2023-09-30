@@ -88,10 +88,7 @@ export function setAISuggestions(toppings) {
       Return the answer in JSON only.`;
 
     try {
-      const resp = await askAI({
-        context,
-        input,
-      });
+      const resp = await askAI(context, input);
 
       const pizzaAI = JSON.parse(resp);
 

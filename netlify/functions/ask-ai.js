@@ -8,8 +8,7 @@ export async function handler(event) {
   const token = process.env.OPENAI_API_KEY;
   const { model, payload, temperature } = JSON.parse(event.body);
 
-  const context = payload.context.context;
-  const input = payload.context.input;
+  const { context, input } = payload;
 
   const messages = [
     {

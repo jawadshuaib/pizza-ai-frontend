@@ -128,9 +128,7 @@ export function createOrder({
 }
 
 async function insertCustomer({ email }) {
-  return await Insert.customer({
-    email,
-  });
+  return await Insert.customer(email);
 }
 
 async function uploadImage({ aiImage }) {
@@ -144,13 +142,13 @@ async function insertOrder({
   customerDescription,
   aiDescription,
 }) {
-  return await Insert.order({
+  return await Insert.order(
     customerId,
     pizzaName,
     imageUrl,
     customerDescription,
     aiDescription,
-  });
+  );
 }
 
 async function insertToppings({
@@ -164,8 +162,5 @@ async function insertToppings({
     .map((row) => row.topping_id);
 
   // Add toppings selected
-  return await Insert.orderToppings({
-    orderId,
-    toppingIds,
-  });
+  return await Insert.orderToppings(orderId, toppingIds);
 }

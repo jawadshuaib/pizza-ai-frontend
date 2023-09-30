@@ -23,7 +23,7 @@ export async function getSimilarToppings(embedding) {
     const response = await fetch(
       '/.netlify/functions/supabase-query/similarToppings',
       {
-        method: 'POST', // Use POST since we are sending data
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },

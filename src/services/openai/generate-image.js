@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export default async function generateImage(prompt) {
   try {
     const response = await fetch('/.netlify/functions/generate-image', {
@@ -16,8 +17,9 @@ export default async function generateImage(prompt) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data.url;
+    // const data = await response.json();
+    // return data.url;
+    return 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-fjrJOPSACALV6hQYyDaufQ2g/user-LZMlgSZCBAhrIkOmf8ooTgu9/img-gN0BI8aqNkfMgivqLCvexS4A.png?st=2023-09-30T14%3A54%3A48Z&se=2023-09-30T16%3A54%3A48Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-09-30T00%3A17%3A14Z&ske=2023-10-01T00%3A17%3A14Z&sks=b&skv=2021-08-06&sig=2eL9UmRlKfGE5iNJGCK2ZyBqCuWn/mKfcdHjQqh5wyo%3D';
   } catch (error) {
     console.error('Fetch error:', error);
     return { error: error.message };

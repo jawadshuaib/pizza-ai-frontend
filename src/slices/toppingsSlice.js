@@ -64,10 +64,7 @@ export function setSuggestedToppings(allToppings = [], input) {
     context = context.replace('---CUSTOM---STRING---HERE---', toppingsStr);
 
     try {
-      const resp = await askAI({
-        context,
-        input,
-      });
+      const resp = await askAI(context, input);
       // const suggestions = toLowerCaseArray(['Onions', 'Bacon']);
       const suggestions = JSON.parse(resp).toppings;
       dispatch(toppingsReducer.actions.setSuggestedToppings(suggestions));
