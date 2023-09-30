@@ -19,8 +19,6 @@ export async function handler(event) {
       size: size || '512x512',
     };
 
-    console.log(imageParams);
-
     const response = await openai.images.generate(imageParams);
     const url = response.data[0].url;
 

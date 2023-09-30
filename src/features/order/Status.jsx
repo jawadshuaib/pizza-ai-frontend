@@ -35,7 +35,7 @@ export default function Status() {
     const fetchOrder = async () => {
       try {
         // ## Check if order exists ##
-        const { result: orderExists } = await doesOrderExist({ orderId });
+        const orderExists = await doesOrderExist({ orderId });
         if (orderExists !== true) {
           navigate('/');
           return;

@@ -4,14 +4,15 @@ import { Paragraph } from '../../ui';
 export default function About() {
   return (
     <>
+      <Paragraph custom="text-left mb-2">Hi,</Paragraph>
       <Paragraph custom="text-left mb-2">
-        Hi, I created Pizza AI to showcase the potential for using Generative AI
-        to query privately held dataset - in this case, a pizza menu.
+        I created Pizza AI to showcase the potential for using Generative AI to
+        query privately held datasets - in this case, a pizza menu.
       </Paragraph>
       <Paragraph custom="text-left mb-2">
-        Many technologies fall victim to the Gartner hype cycle. However, I
-        believe that Generative AI is neither hype nor a fad. It has the
-        potential to increase productivity across domains.
+        Many technologies fall victim to the Gartner hype cycle. Generative AI,
+        though, is neither hype nor a fad. It has the potential to increase
+        productivity across domains.
       </Paragraph>
 
       <Paragraph custom="text-left mb-2">
@@ -21,8 +22,8 @@ export default function About() {
           find a house near a good school in a quiet neighborhood with a big
           backyard
         </span>
-        . Applications like that are just waiting to be built. Which is why I am
-        extremely excited by this tech.
+        . Applications like that are already possible and just waiting to be
+        built.
       </Paragraph>
       {/* <Paragraph custom="text-left mb-2">
         Generative AI does away with hours of search, and replaces it with
@@ -36,7 +37,7 @@ export default function About() {
           rel="noopener noreferrer"
           className=" underline hover:text-blue-500 dark:text-blue-200"
         >
-          get in touch with me
+          get in touch
         </a>
         .
       </Paragraph>
