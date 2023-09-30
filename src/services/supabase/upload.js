@@ -1,7 +1,26 @@
 import supabase from './supabase';
-import { blobToFile, fetchImageBlob } from '../../utils/common';
+import { fetchImageBlob, blobToBase64 } from '../../utils/common';
 import { mode, corsProxy } from '../../utils/settings';
 import { v4 as uuidv4 } from 'uuid';
+
+async function callNetlifyUploadFunction(action, body) {
+  try {
+    const response = await fetch(
+      `/.netlify/functions/supabase-upload/${action}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      },
+    );
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Error calling Netlify function:', error);
+    throw error;
+  }
+}
 
 export async function fetchAndUploadImage(imageUrl) {
   // Get development or production proxy
@@ -9,13 +28,29 @@ export async function fetchAndUploadImage(imageUrl) {
   const baseUrl = mode.isDevelopment ? corsProxy.local : corsProxy.remote;
   imageUrl = encodeURIComponent(imageUrl);
   imageUrl = `${baseUrl}${imageUrl}`;
-  // fetch image blob
+  // Fetch image blob
   const blob = await fetchImageBlob(imageUrl);
-  // convert blob to file
-  const file = blobToFile(blob);
-  // upload image to Supabase Storage
-  return await uploadImageToSupabase(file);
+  // Convert to Base64 string so it can be passed to Netlify function
+  const base64 = await blobToBase64(blob);
+  return await callNetlifyUploadFunction('fetchAndUploadImage', {
+    file: base64,
+  });
 }
+
+// export async function fetchAndUploadImage(imageUrl) {
+//   // Get development or production proxy
+//   // Add proxy to image url
+//   const baseUrl = mode.isDevelopment ? corsProxy.local : corsProxy.remote;
+//   imageUrl = encodeURIComponent(imageUrl);
+//   imageUrl = `${baseUrl}${imageUrl}`;
+//   // fetch image blob
+//   const blob = await fetchImageBlob(imageUrl);
+//   // convert blob to file
+//   const file = blobToFile(blob);
+//   // upload image to Supabase Storage
+//   return await uploadImageToSupabase(file);
+// }
+
 // Upload image to Supabase Storage
 export async function uploadImageToSupabase(file) {
   const path = `public/${uuidv4()}.png`;
