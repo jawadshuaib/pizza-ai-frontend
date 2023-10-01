@@ -1,148 +1,54 @@
-export async function getAvailableToppings() {
-  const endpoint = '/.netlify/functions/supabase-query/availableToppings';
-
+async function fetchData(action, method = 'GET', body = null) {
+  const url = `/.netlify/functions/supabase-query/${action}`;
   try {
-    const serverResponse = await fetch(endpoint, { method: 'GET' });
+    const options = {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-    if (!serverResponse.ok) {
-      throw new Error(
-        `Failed to fetch available toppings. Status: ${serverResponse.status} ${serverResponse.statusText}`,
-      );
+    if (body) options.body = JSON.stringify(body);
+
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const toppingsData = await serverResponse.json();
-    return toppingsData;
+    return await response.json();
   } catch (error) {
-    console.error('Error occurred while fetching available toppings:', error);
+    console.error('Error occurred while fetching data:', error);
     throw error;
   }
+}
+
+export async function getAvailableToppings() {
+  const action = 'availableToppings';
+  return await fetchData(action);
 }
 
 export async function getSimilarToppings(embedding) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-query/similarToppings',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ embedding }), // Include the embedding data in the request body
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Fetch error when accessing getSimilarToppings:', error);
-    throw error;
-  }
+  const action = 'similarToppings';
+  return await fetchData(action, 'POST', { embedding });
 }
 
 export async function getToppingsOrdered(orderId) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-query/toppingsOrdered',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderId),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error occurred while fetching toppings ordered:', error);
-    throw error;
-  }
+  const action = 'toppingsOrdered';
+  return await fetchData(action, 'POST', orderId);
 }
 
 export async function doesOrderExist(orderId) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-query/doesOrderExist',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderId),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error('Error occurred while checking if order exists:', error);
-    throw error;
-  }
+  const action = 'doesOrderExist';
+  return await fetchData(action, 'POST', orderId);
 }
 
 export async function getOrderDetails(orderId) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-query/orderDetails',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderId),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error('Error occurred while fetching order details:', error);
-    throw error;
-  }
+  const action = 'orderDetails';
+  return await fetchData(action, 'POST', orderId);
 }
 
 export async function getCustomerDetails(customerId) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-query/customerDetails',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(customerId),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error occurred while fetching customer details:', error);
-    throw error;
-  }
+  const action = 'customerDetails';
+  return await fetchData(action, 'POST', customerId);
 }
-
-export default getAvailableToppings;
