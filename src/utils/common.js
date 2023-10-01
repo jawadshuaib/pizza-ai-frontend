@@ -22,6 +22,10 @@ async function fetchImageBlob(url) {
   return await response.blob();
 }
 
+const blobToFile = (blob, fileName = 'temp-name.png') => {
+  return new File([blob], fileName, { type: 'image/png' });
+};
+
 function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -41,5 +45,6 @@ export {
   capitalizeFirstLetters,
   fetchImageBlob,
   blobToBase64,
+  blobToFile,
   isValidEmail,
 };

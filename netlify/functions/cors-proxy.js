@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export async function handler(event) {
   const url = event.queryStringParameters.url;
+  // const url = decodeURIComponent(event.queryStringParameters.url);
   const contentType = event.queryStringParameters.contentType;
 
   if (!url) {
