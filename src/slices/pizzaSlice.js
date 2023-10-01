@@ -71,7 +71,7 @@ export function setAISuggestions(toppings) {
     dispatch(setLoading([true, 'Creating your perfect pizza...']));
     // Create a prompt
     let context = `A customer has created a pizza with toppings delimited by ***.
-        You are a pizza expert. Come up with a name that best suits this pizza. And also come up with a delicious description for this pizza.:
+        You are a pizza expert. Come up with a name that best suits this pizza. And also come up with a delicious description for this pizza. The description should only be based on the toppings provided:
     ***
     ---CUSTOM---STRING---HERE---
     ***

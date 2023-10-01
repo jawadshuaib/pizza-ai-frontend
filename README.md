@@ -4,8 +4,6 @@ Pizza AI uses Generative AI to create the perfect Pizza. I wanted to demonstrate
 
 [Link to App](https://pizza-ai.netlify.app/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/130f194f-7775-4688-9f2b-89f261da3f29/deploy-status)](https://app.netlify.com/sites/pizza-ai/deploys)
-
 <img src="./src/assets/screenshot.gif" alt="Pizza AI App" title="Pizza AI App" width="400px"/>
 
 ## Getting Started
