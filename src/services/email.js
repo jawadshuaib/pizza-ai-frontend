@@ -1,6 +1,6 @@
+// Send email using SendGrid via netlify/functions/send-email.js
 import { info } from '../utils/settings';
 
-// This calls the node file in netlify/functions/send-email.js
 export async function email({ to, from, subject, text }) {
   try {
     const response = await fetch('/.netlify/functions/send-email', {
