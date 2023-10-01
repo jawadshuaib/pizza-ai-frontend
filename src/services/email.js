@@ -26,6 +26,7 @@ export async function email({ to, from, subject, text }) {
 }
 
 export const prepareEmail = ({ orderId, pizzaName, imageUrl }) => {
+  console.log('IMAGE URL: ', imageUrl);
   const orderUrl = info.url + 'order/status/' + orderId;
   const text = `
   <a href='${orderUrl}'><img src='${imageUrl}' /></a>`;
