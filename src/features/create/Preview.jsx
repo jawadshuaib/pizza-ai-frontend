@@ -27,7 +27,7 @@ export default function Preview() {
       {AIImage !== '' ? (
         <>
           <Image src={AIImage} alt={AIName} />
-          <Paragraph>
+          <Paragraph custom="bg-yellow-200 rounded-md p-3 mt-3 dark:text-gray-600">
             {AIDescription !== '' ? AIDescription : description}
           </Paragraph>
         </>

@@ -1,26 +1,33 @@
-export async function customer(email) {
+// Insert data into Supabase via netlify/functions/supabase-insert.js:
+async function postData(action, data) {
+  const url = `/.netlify/functions/supabase-insert/${action}`;
   try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-insert/insertCustomer',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify(data),
+    };
+
+    const response = await fetch(url, options);
 
     if (!response.ok) {
       throw new Error(
-        `Failed to insert customer. Status: ${response.status} ${response.statusText}`,
+        `Failed to post data. Status: ${response.status} ${response.statusText}`,
       );
     }
+
     return await response.json();
   } catch (error) {
-    console.error('Error occurred while inserting customer:', error);
+    console.error(`Error occurred while posting data to ${url}:`, error);
     throw error;
   }
+}
+
+export async function customer(email) {
+  const action = 'insertCustomer';
+  return await postData(action, { email });
 }
 
 export async function order(
@@ -30,64 +37,19 @@ export async function order(
   customerDescription,
   aiDescription,
 ) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-insert/insertOrder',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          customerId,
-          pizzaName,
-          imageUrl,
-          customerDescription,
-          aiDescription,
-        }),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to insert customer. Status: ${response.status} ${response.statusText}`,
-      );
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error occurred while inserting customer:', error);
-    throw error;
-  }
+  const action = 'insertOrder';
+  return await postData(action, {
+    customerId,
+    pizzaName,
+    imageUrl,
+    customerDescription,
+    aiDescription,
+  });
 }
 
 export async function orderToppings(orderId, toppingIds) {
-  try {
-    const response = await fetch(
-      '/.netlify/functions/supabase-insert/insertToppings',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderId,
-          toppingIds,
-        }),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to insert customer. Status: ${response.status} ${response.statusText}`,
-      );
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error occurred while inserting customer:', error);
-    throw error;
-  }
+  const action = 'insertToppings';
+  return await postData(action, { orderId, toppingIds });
 }
 
 export default { customer, order, orderToppings };

@@ -1,3 +1,4 @@
+// Query Supabase database using netlify/functions/supabase-query.js:
 async function fetchData(action, method = 'GET', body = null) {
   const url = `/.netlify/functions/supabase-query/${action}`;
   try {

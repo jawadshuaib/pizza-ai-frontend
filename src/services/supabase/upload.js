@@ -1,3 +1,4 @@
+// Upload and download image from Supabase Storage using netlify/functions/supabase-upload.js:
 import { fetchImageBlob, blobToBase64 } from '../../utils/common';
 import { corsProxy } from '../../utils/settings';
 
