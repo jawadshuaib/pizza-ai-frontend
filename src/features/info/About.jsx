@@ -1,5 +1,6 @@
 import React from 'react';
-import { Paragraph } from '../../ui';
+import { Image, Paragraph } from '../../ui';
+import githubImage from '../../assets/github.svg';
 
 export default function About() {
   return (
@@ -24,10 +25,6 @@ export default function About() {
         </span>
         . Applications like that are now possible and just waiting to be built.
       </Paragraph>
-      {/* <Paragraph custom="text-left mb-2">
-        Generative AI does away with hours of search, and replaces it with
-        intutive natural language based queries.
-      </Paragraph> */}
       <Paragraph custom="text-left">
         Feel free to{' '}
         <a
@@ -40,6 +37,18 @@ export default function About() {
         </a>
         .
       </Paragraph>
+      <a
+        href="https://github.com/jawadshuaib/pizza-ai-frontend"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          src={githubImage}
+          custom="mb-3"
+          align="float-left"
+          alt="Link to repo"
+        />
+      </a>
     </>
   );
 }
