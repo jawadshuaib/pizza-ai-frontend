@@ -2,7 +2,7 @@
 
 Pizza AI uses Generative AI to create the perfect Pizza. I wanted to demonstrate a business case for building apps that can combine private data with Generative AI technologies, like OpenAI and Dall-e, to create new experiences.
 
-<img src="./src/assets/screenshot.gif" alt="Pizza AI App" title="Pizza AI App" width="200px"/>
+<img src="./src/assets/screenshot.gif" alt="Pizza AI App" title="Pizza AI App" width="400px"/>
 
 ## Getting Started
 
