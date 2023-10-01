@@ -1,6 +1,5 @@
 export * from './supabase/insert';
 export * from './supabase/query';
-export * from './supabase/supabase';
 export * from './supabase/upload';
 
 export * from './email';

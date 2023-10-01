@@ -11,19 +11,18 @@ export default function About() {
       </Paragraph>
       <Paragraph custom="text-left mb-2">
         Many technologies fall victim to the Gartner hype cycle. Generative AI,
-        though, is neither hype nor a fad. It has the potential to increase
-        productivity across domains.
+        though, is neither hype nor a fad. It has already increased productivity
+        across domains.
       </Paragraph>
 
       <Paragraph custom="text-left mb-2">
-        All sorts of new use cases can be developed. What if, for example, you
-        could simply ask a real estate platform to{' '}
+        All sorts of use cases are now possible. What if, for example, you could
+        simply ask a real estate platform to{' '}
         <span className="text-yellow-500 dark:text-yellow-300">
           find a house near a good school in a quiet neighborhood with a big
           backyard
         </span>
-        . Applications like that are already possible and just waiting to be
-        built.
+        . Applications like that are now possible and just waiting to be built.
       </Paragraph>
       {/* <Paragraph custom="text-left mb-2">
         Generative AI does away with hours of search, and replaces it with

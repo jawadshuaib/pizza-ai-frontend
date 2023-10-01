@@ -1,7 +1,6 @@
 /* eslint-env node */
 import { createClient } from '@supabase/supabase-js';
 import { v4 as uuidv4 } from 'uuid';
-// import { handler as corsProxy } from './cors-proxy';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -79,9 +78,6 @@ async function getImageFromSupabase(path) {
   } else {
     throw new Error('Downloaded data is not a Blob');
   }
-
-  // const url = URL.createObjectURL(data);
-  // return url;
 }
 
 // Upload image to Supabase Storage

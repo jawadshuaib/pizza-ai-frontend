@@ -1,9 +1,10 @@
 /* eslint-env node */
 import axios from 'axios';
 
+// Cors proxy function is called from the React app simply by passing the url
+// i.e. /.netlify/functions/cors-proxy?url=https://www.google.com
 export async function handler(event) {
   const url = event.queryStringParameters.url;
-  // const url = decodeURIComponent(event.queryStringParameters.url);
   const contentType = event.queryStringParameters.contentType;
 
   if (!url) {
