@@ -12,9 +12,9 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const blobToFile = (blob, fileName = 'temp-name.png') => {
-  return new File([blob], fileName, { type: 'image/png' });
-};
+// const blobToFile = (blob, fileName = 'temp-name.png') => {
+//   return new File([blob], fileName, { type: 'image/png' });
+// };
 
 export async function handler(event) {
   try {
@@ -51,12 +51,17 @@ export async function handler(event) {
   }
 }
 
-async function fetchAndUploadImage(blob) {
-  // Convert blob to file
-  const file = blobToFile(blob);
+async function fetchAndUploadImage(buffer) {
   // Upload image to Supabase Storage
-  return await uploadImageToSupabase(file);
+  return await uploadImageToSupabase(buffer);
 }
+
+// async function fetchAndUploadImage(blob) {
+//   // Convert blob to file
+//   const file = blobToFile(blob);
+//   // Upload image to Supabase Storage
+//   return await uploadImageToSupabase(file);
+// }
 
 // Get image from Supabase Storage
 async function getImageFromSupabase(path) {
@@ -81,11 +86,12 @@ async function getImageFromSupabase(path) {
 }
 
 // Upload image to Supabase Storage
-async function uploadImageToSupabase(file) {
+async function uploadImageToSupabase(buffer) {
   const path = `public/${uuidv4()}.png`;
   const { data, error } = await supabase.storage
     .from('pizza-images')
-    .upload(path, file, {
+    .upload(path, buffer, {
+      // Use buffer here
       contentType: 'image/png',
     });
 
