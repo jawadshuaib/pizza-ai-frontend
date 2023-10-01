@@ -48,7 +48,8 @@ Create a .env file in the root directory of the project and populate it with the
     $ SUPABASE_URL=your_supabase_url
     $ SUPABASE_KEY=your_supabase_key
     $ SENDGRID_API_KEY=your_sendgrid_api_key
+    $ VITE_SUPABASE_URL=your_supabase_url
 
-Configure the Same Environment Variables in Netlify:
+Note that VITE_SUPABASE_URL = SUPABASE_URL. Configure the Same Environment Variables in Netlify:
 
 Navigate to your site’s settings in Netlify and add the environment variables under Site settings -> Build & deploy -> Environment.
