@@ -14,10 +14,7 @@ export default function Card({
     onClick();
   }
   return (
-    <div
-      style={{ maxWidth: 768 + 'px' }}
-      className="blockrounded-lg  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  dark:bg-neutral-700"
-    >
+    <div className="lg:min-w-[768px] max-w-[768px] blockrounded-lg  bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  dark:bg-neutral-700">
       <div className="flex text-center justify-center">
         <img
           onClick={handleClick}
