@@ -8,7 +8,7 @@ Pizza AI uses Generative AI to create the perfect Pizza. I wanted to demonstrate
 
 ## Architecture
 
-<img src="./src/assets/architecture" alt="Pizza AI Architecture" title="Pizza AI Architecture" />
+<img src="./src/assets/architecture.png" alt="Pizza AI Architecture" title="Pizza AI Architecture" />
 
 ## Getting Started
 
