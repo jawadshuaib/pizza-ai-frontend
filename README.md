@@ -6,6 +6,10 @@ Pizza AI uses Generative AI to create the perfect Pizza. I wanted to demonstrate
 
 <img src="./src/assets/screenshot.gif" alt="Pizza AI App" title="Pizza AI App" width="400px"/>
 
+## Architecture
+
+<img src="./src/assets/architecture" alt="Pizza AI Architecture" title="Pizza AI Architecture" />
+
 ## Getting Started
 
 If you decide to clone this repo, make sure to host it on netlify as the app uses netlify serverless functions for API calls.
