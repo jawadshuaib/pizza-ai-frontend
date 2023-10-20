@@ -9,8 +9,8 @@ export default function About() {
       <Paragraph custom="text-left mb-2">Hi,</Paragraph>
       <Paragraph custom="text-left mb-2">
         My last <Href href="https://j4wad.com">project</Href> used vector
-        embeddings, stored as a static pickle file, to provide data for a
-        Generative AI chatbot.{' '}
+        embeddings, stored as a static pickle file, to feed data to a Generative
+        AI chatbot.{' '}
       </Paragraph>
       <Paragraph custom="text-left mb-2">
         This project takes that one step further by combining Generative AI with
@@ -23,8 +23,9 @@ export default function About() {
       </Paragraph> */}
 
       <Paragraph custom="text-left mb-2">
-        All sorts of use cases are possible with this sort of approach. What if,
-        for example, you could simply ask a real estate platform to{' '}
+        All sorts of use cases are possible once Generative AI is combined with
+        a dynamic database. What if, for example, you could simply ask a real
+        estate platform to{' '}
         <span className="text-yellow-500 dark:text-yellow-300">
           find a house near a good school in a quiet neighborhood with a big
           backyard
